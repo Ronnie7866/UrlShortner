@@ -1,0 +1,302 @@
+{% extends "base.html" %}
+
+{% block title %}Admin Panel - URL Shortener{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <!-- Top Banner Ad -->
+    <div class="row justify-content-center mb-4">
+        <div class="col-lg-8 text-center">
+            <script type="text/javascript">
+                atOptions = {
+                    'key' : '672c2721ececa1fbcf12b371233cff5b',
+                    'format' : 'iframe',
+                    'height' : 90,
+                    'width' : 728,
+                    'params' : {}
+                };
+            </script>
+            <script type="text/javascript" src="//violationtones.com/672c2721ececa1fbcf12b371233cff5b/invoke.js"></script>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card shadow">
+                <div class="card-header bg-success text-white">
+                    <h3 class="mb-0"><i class="fas fa-chart-bar"></i> Admin Dashboard</h3>
+                </div>
+                <div class="card-body">
+                    <div class="row mb-4">
+                        <div class="col-md-2">
+                            <div class="card bg-primary text-white">
+                                <div class="card-body">
+                                    <h6><i class="fas fa-link"></i> Total URLs</h6>
+                                    <h3>{{ urls|length }}</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="card bg-info text-white">
+                                <div class="card-body">
+                                    <h6><i class="fas fa-calendar-day"></i> Today's Clicks</h6>
+                                    <h3>{{ total_clicks_today }}</h3>
+                                    <small>{{ today_date }}</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="card bg-secondary text-white">
+                                <div class="card-body">
+                                    <h6><i class="fas fa-calendar-minus"></i> Yesterday</h6>
+                                    <h3>{{ total_clicks_yesterday }}</h3>
+                                    <small>{{ yesterday_date }}</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="card bg-success text-white">
+                                <div class="card-body">
+                                    <h6><i class="fas fa-infinity"></i> All Time</h6>
+                                    <h3>{{ total_clicks_all_time }}</h3>
+                                    <small>Total views</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="card bg-warning text-white">
+                                <div class="card-body">
+                                    <h6><i class="fas fa-star"></i> Top Today</h6>
+                                    <h3>{{ top_performer_today }}</h3>
+                                    <small>clicks</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="card bg-danger text-white">
+                                <div class="card-body">
+                                    <h6><i class="fas fa-chart-line"></i> Avg Today</h6>
+                                    <h3>{{ "%.1f"|format(avg_clicks_today) }}</h3>
+                                    <small>per URL</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Reset Button -->
+                    <div class="row mb-4">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5><i class="fas fa-clock"></i> Auto-Reset Schedule</h5>
+                                    <p class="mb-2">Views automatically reset daily at <strong>12:00 AM IST</strong></p>
+                                    <div id="scheduler-status" class="mb-3">
+                                        <span class="badge bg-secondary">Loading scheduler status...</span>
+                                    </div>
+                                    <button class="btn btn-warning me-2" onclick="resetDailyData()">
+                                        <i class="fas fa-refresh"></i> Manual Reset Today's Data
+                                    </button>
+                                    <button class="btn btn-info" onclick="checkSchedulerStatus()">
+                                        <i class="fas fa-info-circle"></i> Check Schedule Status
+                                    </button>
+                                    <small class="text-muted d-block mt-2">Manual reset will clear all clicks for today only</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h4><i class="fas fa-list"></i> All Shortened URLs</h4>
+
+                    {% if urls %}
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th>Short Code</th>
+                                    <th>Original URL</th>
+                                    <th>Today</th>
+                                    <th>Yesterday</th>
+                                    <th>All Time</th>
+                                    <th>Created</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for url in urls %}
+                                <tr>
+                                    <td>
+                                        <code>{{ url.short_code }}</code>
+                                    </td>
+                                    <td>
+                                        <a href="{{ url.original_url }}" target="_blank" class="text-truncate d-inline-block" style="max-width: 200px;">
+                                            {{ url.original_url }}
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <span class="badge bg-info">{{ url.clicks_today }}</span>
+                                    </td>
+                                    <td>
+                                        <span class="badge bg-secondary">{{ url.clicks_yesterday }}</span>
+                                    </td>
+                                    <td>
+                                        <span class="badge bg-success">{{ url.clicks_all_time }}</span>
+                                    </td>
+                                    <td>
+                                        <small>{{ url.created_at.strftime('%Y-%m-%d %H:%M') }}</small>
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-sm btn-outline-primary" onclick="copyToClipboard('{{ request.url.scheme }}://{{ request.url.netloc }}/{{ url.short_code }}')">
+                                            <i class="fas fa-copy"></i>
+                                        </button>
+                                        <button class="btn btn-sm btn-outline-danger" onclick="deleteUrl({{ url.id }})">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    {% else %}
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle"></i> No URLs have been shortened yet. 
+                        <a href="/" class="alert-link">Create your first one!</a>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- Native Banner Ad -->
+            <div class="card mt-4">
+                <div class="card-body text-center">
+                    <script async="async" data-cfasync="false" src="//violationtones.com/89138f2671a74d755698d6d16466866f/invoke.js"></script>
+                    <div id="container-89138f2671a74d755698d6d16466866f-admin"></div>
+                </div>
+            </div>
+
+            <!-- Revenue Maximization: Side-by-side banners -->
+            <div class="row mt-4">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <small class="text-muted">Sponsored</small>
+                            <div class="ad-banner-300x250">
+                                <script type="text/javascript">
+                                    atOptions = {
+                                        'key' : '672c2721ececa1fbcf12b371233cff5b',
+                                        'format' : 'iframe',
+                                        'height' : 250,
+                                        'width' : 300,
+                                        'params' : {}
+                                    };
+                                </script>
+                                <script type="text/javascript" src="//violationtones.com/672c2721ececa1fbcf12b371233cff5b/invoke.js"></script>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <small class="text-muted">Advertisement</small>
+                            <div class="ad-banner-300x250">
+                                <script type="text/javascript">
+                                    atOptions = {
+                                        'key' : '672c2721ececa1fbcf12b371233cff5b',
+                                        'format' : 'iframe',
+                                        'height' : 250,
+                                        'width' : 300,
+                                        'params' : {}
+                                    };
+                                </script>
+                                <script type="text/javascript" src="//violationtones.com/672c2721ececa1fbcf12b371233cff5b/invoke.js"></script>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function copyToClipboard(text) {
+    navigator.clipboard.writeText(text).then(function() {
+        // Show success message
+        const toast = document.createElement('div');
+        toast.className = 'toast-notification';
+        toast.textContent = 'Link copied to clipboard!';
+        document.body.appendChild(toast);
+
+        setTimeout(() => {
+            document.body.removeChild(toast);
+        }, 3000);
+    });
+}
+
+async function deleteUrl(urlId) {
+    if (!confirm('Are you sure you want to delete this URL? This action cannot be undone.')) {
+        return;
+    }
+
+    try {
+        const response = await fetch(`/api/urls/${urlId}`, {
+            method: 'DELETE'
+        });
+
+        if (response.ok) {
+            location.reload();
+        } else {
+            alert('Failed to delete URL');
+        }
+    } catch (error) {
+        alert('Error deleting URL');
+    }
+}
+
+async function resetDailyData() {
+    if (!confirm('Are you sure you want to reset today\'s click data? This action cannot be undone.')) {
+        return;
+    }
+
+    try {
+        const response = await fetch('/api/reset-daily-data', {
+            method: 'POST'
+        });
+
+        if (response.ok) {
+            const result = await response.json();
+            alert(result.message);
+            location.reload();
+        } else {
+            alert('Failed to reset daily data');
+        }
+    } catch (error) {
+        alert('Error resetting daily data');
+    }
+}
+
+async function checkSchedulerStatus() {
+    try {
+        const response = await fetch('/api/scheduler-status');
+        if (response.ok) {
+            const data = await response.json();
+            const statusElement = document.getElementById('scheduler-status');
+            if (data.is_running) {
+                statusElement.innerHTML = '<span class="badge bg-success">Scheduler is running</span>';
+            } else {
+                statusElement.innerHTML = '<span class="badge bg-danger">Scheduler is not running</span>';
+            }
+        } else {
+            document.getElementById('scheduler-status').innerHTML = '<span class="badge bg-warning">Unable to check scheduler status</span>';
+        }
+    } catch (error) {
+        console.error('Error checking scheduler status:', error);
+        document.getElementById('scheduler-status').innerHTML = '<span class="badge bg-danger">Error checking scheduler status</span>';
+    }
+}
+
+// Call checkSchedulerStatus when the page loads
+window.onload = checkSchedulerStatus;
+</script>
+{% endblock %}

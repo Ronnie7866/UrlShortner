@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Personal URL Shortener{% endblock %}</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/static/css/style.css">
+    
+    {% block extra_head %}{% endblock %}
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <i class="fas fa-link"></i> ShortLink Pro
+            </a>
+            <div class="navbar-nav ms-auto">
+                <a class="nav-link" href="/">
+                    <i class="fas fa-home"></i> Home
+                </a>
+                <a class="nav-link" href="/admin">
+                    <i class="fas fa-chart-bar"></i> Admin
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="bg-light text-center py-3 mt-5">
+        <div class="container">
+            <p class="mb-0">&copy; 2025 Personal URL Shortener. Built with FastAPI.</p>
+        </div>
+    </footer>
+
+    <!-- Revenue Maximization Ad Scripts -->
+    <!-- Social Bar Ad - consistent revenue -->
+    <script type='text/javascript' src='//violationtones.com/18/8c/4c/188c4c54eba5ae5547bf0ad3cf5078ef.js'></script>
+    
+    <!-- Popunder for homepage -->
+    <script type='text/javascript' src='//violationtones.com/ee/f7/3f/eef73fd8870a14af53fbf0e6247fb765.js'></script>
+    
+    <!-- Enhanced popup triggers -->
+    <script type='text/javascript'>
+        // Multiple popup triggers for maximum revenue
+        let popupTriggered = false;
+        
+        // Trigger on page load
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                if (!popupTriggered && typeof window.open !== 'undefined') {
+                    popupTriggered = true;
+                }
+            }, 3000);
+        });
+        
+        // Trigger on first user interaction
+        document.addEventListener('click', function() {
+            if (!popupTriggered) {
+                popupTriggered = true;
+            }
+        }, { once: true });
+    </script>
+    
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="/static/js/main.js"></script>
+    
+    {% block extra_scripts %}{% endblock %}
+</body>
+</html>

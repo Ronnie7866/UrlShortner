@@ -1,0 +1,362 @@
+/* Custom styles for URL Shortener */
+
+:root {
+    --primary-color: #007bff;
+    --secondary-color: #6c757d;
+    --success-color: #28a745;
+    --danger-color: #dc3545;
+    --warning-color: #ffc107;
+    --info-color: #17a2b8;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f9fa;
+}
+
+/* Navigation */
+.navbar-brand {
+    font-weight: 600;
+    font-size: 1.5rem;
+}
+
+/* Cards */
+.card {
+    border: none;
+    border-radius: 15px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+}
+
+.card-header {
+    border-radius: 15px 15px 0 0 !important;
+    border-bottom: none;
+    padding: 1.5rem;
+}
+
+/* Buttons */
+.btn {
+    border-radius: 25px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+/* Form controls */
+.form-control {
+    border-radius: 25px;
+    border: 2px solid #e9ecef;
+    padding: 12px 20px;
+    transition: all 0.3s ease;
+}
+
+.form-control:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.2rem rgba(0,123,255,0.25);
+}
+
+.input-group-text {
+    border-radius: 25px 0 0 25px;
+    border: 2px solid #e9ecef;
+    border-right: none;
+    background-color: #f8f9fa;
+}
+
+/* Alerts */
+.alert {
+    border-radius: 15px;
+    border: none;
+    padding: 1.5rem;
+}
+
+/* Table */
+.table {
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+}
+
+.table thead th {
+    border: none;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+}
+
+.table tbody tr {
+    transition: all 0.3s ease;
+}
+
+.table tbody tr:hover {
+    background-color: rgba(0,123,255,0.05);
+    transform: scale(1.01);
+}
+
+/* Badge */
+.badge {
+    border-radius: 25px;
+    padding: 0.5rem 1rem;
+    font-weight: 500;
+}
+
+/* Toast notification */
+.toast-notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: var(--success-color);
+    color: white;
+    padding: 15px 25px;
+    border-radius: 25px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    z-index: 1050;
+    animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Statistics cards */
+.card.bg-primary,
+.card.bg-info,
+.card.bg-warning,
+.card.bg-success {
+    border-radius: 15px;
+    transition: transform 0.3s ease;
+}
+
+.card.bg-primary:hover,
+.card.bg-info:hover,
+.card.bg-warning:hover,
+.card.bg-success:hover {
+    transform: scale(1.05);
+}
+
+/* Code styling */
+code {
+    background-color: #f8f9fa;
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-family: 'Courier New', monospace;
+}
+
+/* Footer */
+footer {
+    margin-top: auto;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .container {
+        padding: 0 15px;
+    }
+    
+    .card-body {
+        padding: 1rem;
+    }
+    
+    .table-responsive {
+        border-radius: 15px;
+    }
+    
+    .btn {
+        font-size: 0.9rem;
+        padding: 10px 20px;
+    }
+}
+
+/* Loading spinner */
+.spinner-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255,255,255,0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1060;
+}
+
+.spinner-border-lg {
+    width: 3rem;
+    height: 3rem;
+}
+
+/* Disable text selection for intermediate pages */
+.no-select {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* Disable right-click context menu */
+.no-context {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* Ad styling for better integration */
+.ad-banner-728x90,
+.ad-banner-300x250 {
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+.ad-banner-728x90:hover,
+.ad-banner-300x250:hover {
+    transform: translateY(-2px);
+}
+
+/* Mobile-specific ad styling */
+.ad-banner-320x50 {
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    margin: 10px auto;
+    transition: transform 0.3s ease;
+}
+
+.ad-banner-320x50:hover {
+    transform: translateY(-1px);
+}
+
+.ad-banner-320x100 {
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.15);
+    margin: 10px auto;
+    transition: transform 0.3s ease;
+}
+
+.ad-banner-320x100:hover {
+    transform: translateY(-2px);
+}
+
+/* Mobile interstitial styling */
+.mobile-interstitial {
+    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+    border: 1px solid #dee2e6;
+    animation: fadeInUp 0.5s ease;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Sidebar ad styles */
+.sidebar-ads-left,
+.sidebar-ads-right {
+    padding: 0 10px;
+}
+
+.sidebar-ad {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+/* Countdown container styles */
+.countdown-ads-container {
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    backdrop-filter: blur(10px);
+}
+
+/* Responsive ad adjustments */
+@media (max-width: 768px) {
+    .ad-banner-728x90 {
+        max-width: 100%;
+        overflow-x: auto;
+        transform: scale(0.9);
+        transform-origin: center;
+    }
+    
+    .ad-banner-300x250 {
+        transform: scale(0.95);
+        transform-origin: center;
+    }
+    
+    .d-none.d-lg-block {
+        display: none !important;
+    }
+    
+    /* Mobile-first approach - remove sidebars */
+    .sidebar-ads-left,
+    .sidebar-ads-right {
+        display: none !important;
+    }
+    
+    /* Full width on mobile */
+    .container-fluid {
+        padding: 0 15px;
+    }
+    
+    /* Reduce padding on mobile for more ad space */
+    .intermediate-card .card-body {
+        padding: 2rem 1rem;
+    }
+    
+    /* Make timer smaller on mobile */
+    .timer-display {
+        font-size: 2.5rem;
+    }
+    
+    .progress-circle {
+        width: 120px;
+        height: 120px;
+    }
+    
+    /* Optimize countdown container for mobile */
+    .countdown-ads-container {
+        padding: 15px;
+        margin: 15px 0;
+    }
+}
+
+/* Desktop optimizations */
+@media (min-width: 992px) {
+    .sidebar-ads-left,
+    .sidebar-ads-right {
+        max-height: 100vh;
+        overflow-y: auto;
+    }
+    
+    /* Adjust main content padding for sidebars */
+    .intermediate-container .container-fluid {
+        max-width: 1400px;
+    }
+}
