@@ -95,22 +95,20 @@ The application uses a simple two-table schema:
 - IP address logging for abuse prevention
 
 ## Recent Changes
-- June 25, 2025: Fixed database integration by switching from PostgreSQL to SQLite 
-- June 25, 2025: Integrated comprehensive ad monetization across all pages
-- June 25, 2025: Added DirectLink redirect functionality for maximum earnings
+- June 25, 2025: Fixed database integration by switching from PostgreSQL to SQLite
+- June 25, 2025: Cleaned up codebase by removing all advertising integrations
 - June 25, 2025: Fixed session handling by replacing cookies with form-based approach
-- June 25, 2025: Enhanced ad integration with multiple popup/popunder triggers for maximum revenue
-- June 25, 2025: Confirmed backend API functionality - `/api/shorten` endpoint works with full ad flow
+- June 25, 2025: Optimized for clean, fast user experience
+- June 25, 2025: Confirmed backend API functionality - `/api/shorten` endpoint works perfectly
 
-## Monetization Integration
-The application now includes comprehensive ad integration for maximum earnings:
-- **Banner Ads (728x90)**: Integrated on all main pages and intermediate pages
-- **Native Banner Ads**: Added to homepage and admin panel
-- **Popunder Ads**: Active on all pages for additional revenue
-- **Social Bar Ads**: Integrated across the entire site
-- **DirectLink Integration**: Special `/direct/` endpoint for direct ad network redirects
+## Clean Implementation
+The application provides a clean, ad-free URL shortening experience:
+- **Fast Performance**: No external ad scripts slowing down the site
+- **Clean Interface**: Focused on core functionality without distractions
+- **Privacy Focused**: No tracking scripts or third-party ad networks
+- **User Experience**: Smooth navigation through intermediate pages
 
 ## User Preferences
 - Database: SQLite (preferred over PostgreSQL for simplicity)
-- Monetization: Maximum earnings priority with comprehensive ad integration
+- Focus: Clean, fast, and user-friendly URL shortening experience
 - Communication style: Simple, everyday language

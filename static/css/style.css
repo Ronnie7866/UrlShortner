@@ -219,129 +219,38 @@ footer {
     user-select: none;
 }
 
-/* Ad styling for better integration */
-.ad-banner-728x90,
-.ad-banner-300x250 {
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    transition: transform 0.3s ease;
-}
 
-.ad-banner-728x90:hover,
-.ad-banner-300x250:hover {
-    transform: translateY(-2px);
-}
-
-/* Mobile-specific ad styling */
-.ad-banner-320x50 {
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    margin: 10px auto;
-    transition: transform 0.3s ease;
-}
-
-.ad-banner-320x50:hover {
-    transform: translateY(-1px);
-}
-
-.ad-banner-320x100 {
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 3px 12px rgba(0,0,0,0.15);
-    margin: 10px auto;
-    transition: transform 0.3s ease;
-}
-
-.ad-banner-320x100:hover {
-    transform: translateY(-2px);
-}
-
-/* Mobile interstitial styling */
-.mobile-interstitial {
-    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
-    border: 1px solid #dee2e6;
-    animation: fadeInUp 0.5s ease;
-}
-
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* Sidebar ad styles */
-.sidebar-ads-left,
-.sidebar-ads-right {
-    padding: 0 10px;
-}
-
-.sidebar-ad {
-    background: rgba(255, 255, 255, 0.95);
-    border-radius: 10px;
-    padding: 15px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    text-align: center;
-}
 
 /* Countdown container styles */
-.countdown-ads-container {
+.countdown-container {
     box-shadow: 0 10px 30px rgba(0,0,0,0.2);
     backdrop-filter: blur(10px);
 }
 
-/* Responsive ad adjustments */
+/* Responsive adjustments */
 @media (max-width: 768px) {
-    .ad-banner-728x90 {
-        max-width: 100%;
-        overflow-x: auto;
-        transform: scale(0.9);
-        transform-origin: center;
-    }
-    
-    .ad-banner-300x250 {
-        transform: scale(0.95);
-        transform-origin: center;
-    }
-    
-    .d-none.d-lg-block {
-        display: none !important;
-    }
-    
-    /* Mobile-first approach - remove sidebars */
-    .sidebar-ads-left,
-    .sidebar-ads-right {
-        display: none !important;
-    }
-    
     /* Full width on mobile */
     .container-fluid {
         padding: 0 15px;
     }
-    
-    /* Reduce padding on mobile for more ad space */
+
+    /* Reduce padding on mobile */
     .intermediate-card .card-body {
         padding: 2rem 1rem;
     }
-    
+
     /* Make timer smaller on mobile */
     .timer-display {
         font-size: 2.5rem;
     }
-    
+
     .progress-circle {
         width: 120px;
         height: 120px;
     }
-    
+
     /* Optimize countdown container for mobile */
-    .countdown-ads-container {
+    .countdown-container {
         padding: 15px;
         margin: 15px 0;
     }
@@ -349,14 +258,8 @@ footer {
 
 /* Desktop optimizations */
 @media (min-width: 992px) {
-    .sidebar-ads-left,
-    .sidebar-ads-right {
-        max-height: 100vh;
-        overflow-y: auto;
-    }
-    
-    /* Adjust main content padding for sidebars */
+    /* Adjust main content */
     .intermediate-container .container-fluid {
-        max-width: 1400px;
+        max-width: 1200px;
     }
 }

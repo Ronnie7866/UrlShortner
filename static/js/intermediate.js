@@ -128,8 +128,7 @@ class IntermediatePage {
             timerDisplay.textContent = '✓';
             timerDisplay.style.color = '#28a745';
 
-            // Show interstitial ad (non-popup) when button becomes available
-            this.showInterstitialAd();
+
 
             return;
         }
@@ -144,11 +143,8 @@ class IntermediatePage {
         continueBtn.disabled = true;
         continueBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Loading...';
 
-        // MAXIMUM REVENUE: Trigger ads on continue button click (after user click)
-        this.triggerContinueClickAds();
-
-        // Wait for ads to trigger before navigation
-        await new Promise(resolve => setTimeout(resolve, 2000));
+        // Small delay for better UX
+        await new Promise(resolve => setTimeout(resolve, 500));
 
         try {
             // Send current page info with the request
@@ -192,167 +188,11 @@ class IntermediatePage {
         }
     }
 
-    triggerContinueButtonAds() {
-        try {
-            // Pre-load interstitial ad when button becomes available
-            this.showInterstitialAd();
 
-        } catch (e) {
-            // Silent error handling
-        }
-    }
 
-    triggerContinueClickAds() {
-        try {
-            const isLastPage = this.page >= this.totalPages;
-            
-            if (isLastPage) {
-                // On last page: Try DirectLink first, then popup as fallback
-                if (typeof window.forceDirectLink === 'function') {
-                    const directLinkSuccess = window.forceDirectLink();
-                    if (!directLinkSuccess && typeof window.forceContinuePopup === 'function') {
-                        window.forceContinuePopup();
-                    }
-                }
-            } else {
-                // On intermediate pages: Use popup only
-                if (typeof window.forceContinuePopup === 'function') {
-                    window.forceContinuePopup();
-                }
-            }
 
-            // Background popunder for passive revenue (if not already triggered)
-            setTimeout(() => {
-                if (typeof window.forcePopunder === 'function') {
-                    window.forcePopunder();
-                }
-            }, 1000);
 
-        } catch (e) {
-            // Silent error handling
-        }
-    }
 
-    showEngagementBanners() {
-        // Add more banners during engagement/wait time for maximum revenue
-        const timerContainer = document.querySelector('.progress-circle').parentNode;
-        const existingEngagement = document.getElementById('engagement-banners');
-
-        if (!existingEngagement && timerContainer) {
-            const engagementContainer = document.createElement('div');
-            engagementContainer.id = 'engagement-banners';
-            engagementContainer.className = 'engagement-revenue-zone';
-            engagementContainer.style.cssText = `
-                background: linear-gradient(135deg, #667eea, #764ba2);
-                padding: 20px;
-                border-radius: 15px;
-                margin: 20px 0;
-                text-align: center;
-                color: white;
-                box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            `;
-
-            engagementContainer.innerHTML = `
-                <div class="engagement-header mb-3">
-                    <i class="fas fa-clock fa-2x mb-2"></i>
-                    <h6>While You Wait - Exclusive Offers</h6>
-                </div>
-
-                <!-- High-value engagement banner 1 -->
-                <div class="engagement-ad-1 mb-3" style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 10px;">
-                    <script type="text/javascript">
-                        atOptions = {
-                            'key' : '672c2721ececa1fbcf12b371233cff5b',
-                            'format' : 'iframe',
-                            'height' : 100,
-                            'width' : 320,
-                            'params' : {}
-                        };
-                    </script>
-                    <script type="text/javascript" src="//violationtones.com/672c2721ececa1fbcf12b371233cff5b/invoke.js"></script>
-                </div>
-
-                <!-- Native content ad for higher engagement -->
-                <div class="engagement-ad-2 mb-3" style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 10px;">
-                    <small class="d-block mb-2"><i class="fas fa-star"></i> Featured Content</small>
-                    <script async="async" data-cfasync="false" src="//violationtones.com/89138f2671a74d755698d6d16466866f/invoke.js"></script>
-                    <div id="container-89138f2671a74d755698d6d16466866f-engagement${this.page}"></div>
-                </div>
-
-                <!-- Mobile-optimized banner -->
-                <div class="engagement-ad-3 d-block d-md-none" style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 10px;">
-                    <script type="text/javascript">
-                        atOptions = {
-                            'key' : '672c2721ececa1fbcf12b371233cff5b',
-                            'format' : 'iframe',
-                            'height' : 100,
-                            'width' : 320,
-                            'params' : {}
-                        };
-                    </script>
-                    <script type="text/javascript" src="//violationtones.com/672c2721ececa1fbcf12b371233cff5b/invoke.js"></script>
-                </div>
-
-                <!-- Desktop additional banner -->
-                <div class="engagement-ad-4 d-none d-md-block" style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 10px;">
-                    <script type="text/javascript">
-                        atOptions = {
-                            'key' : '672c2721ececa1fbcf12b371233cff5b',
-                            'format' : 'iframe',
-                            'height' : 250,
-                            'width' : 300,
-                            'params' : {}
-                        };
-                    </script>
-                    <script type="text/javascript" src="//violationtones.com/672c2721ececa1fbcf12b371233cff5b/invoke.js"></script>
-                </div>
-
-                <div class="engagement-footer mt-3">
-                    <small><i class="fas fa-shield-check"></i> Secure verification in progress...</small>
-                </div>
-            `;
-
-            // Insert after timer container
-            timerContainer.parentNode.insertBefore(engagementContainer, timerContainer.nextSibling);
-        }
-    }
-
-    showInterstitialAd() {
-        // Create dynamic ad above continue button for extra revenue
-        const continueBtn = document.getElementById('continueBtn');
-        const existingAd = document.getElementById('continue-interstitial-ad');
-
-        if (!existingAd && continueBtn) {
-            const adContainer = document.createElement('div');
-            adContainer.id = 'continue-interstitial-ad';
-            adContainer.className = 'text-center mt-3 mb-3';
-            adContainer.style.cssText = 'background: linear-gradient(45deg, #667eea, #764ba2); padding: 15px; border-radius: 10px; color: white;';
-
-            adContainer.innerHTML = `
-                <small><i class="fas fa-gift"></i> Unlock Your Link - Special Offer</small>
-                <div class="mt-2">
-                    <script type="text/javascript">
-                        atOptions = {
-                            'key' : '672c2721ececa1fbcf12b371233cff5b',
-                            'format' : 'iframe',
-                            'height' : 100,
-                            'width' : 320,
-                            'params' : {}
-                        };
-                    </script>
-                    <script type="text/javascript" src="//violationtones.com/672c2721ececa1fbcf12b371233cff5b/invoke.js"></script>
-                </div>
-            `;
-
-            // Insert before continue button
-            continueBtn.parentNode.insertBefore(adContainer, continueBtn);
-
-            // Execute the ad script
-            const script = document.createElement('script');
-            script.src = '//violationtones.com/672c2721ececa1fbcf12b371233cff5b/invoke.js';
-            document.head.appendChild(script);
-        }
-    }
 }
 
 // Add pulse animation CSS

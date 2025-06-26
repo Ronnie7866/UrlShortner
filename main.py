@@ -334,12 +334,7 @@ async def advance_page(short_code: str, request: Request, db: Session = Depends(
     response_data = {"next_page": next_page}
     return JSONResponse(content=response_data)
 
-@app.get("/direct/{target_url:path}")
-async def direct_link_redirect(target_url: str):
-    """Direct link redirect for maximum ad revenue"""
-    # Your DirectLink URL from the ad network - this maximizes earnings
-    redirect_url = f"https://violationtones.com/wk3jtk9r7?key=f1a89e3aaa7086cc2113978186f98dcd&url={target_url}"
-    return RedirectResponse(url=redirect_url)
+
 
 # Shutdown event to stop scheduler
 @app.on_event("shutdown")
