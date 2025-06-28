@@ -118,7 +118,11 @@ class IntermediatePage {
 
             // Enable continue button
             continueBtn.disabled = false;
-            continueBtn.innerHTML = '<i class="fas fa-arrow-right"></i> Continue';
+            if (this.page === this.totalPages) {
+                continueBtn.innerHTML = '<i class="fas fa-arrow-right"></i> Get Link';
+            } else {
+                continueBtn.innerHTML = '<i class="fas fa-arrow-right"></i> Continue';
+            }
             continueBtn.classList.add('btn-pulse');
 
             // Add pulse animation
