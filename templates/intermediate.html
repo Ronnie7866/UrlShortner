@@ -120,11 +120,12 @@
                                 <div class="timer-display" id="timer">15</div>
                             </div>
 
-                            <!-- Visible Banner Ad Container -->
-                            <div class="ad-container mb-4" style="min-height: 100px; background: #f8f9fa; border: 1px solid #dee2e6; border-radius: 10px; display: flex; align-items: center; justify-content: center; text-align: center; padding: 20px;">
-                                <div id="banner-ad-1" style="width: 100%; min-height: 90px;">
-                                    <!-- Banner ad will load here -->
-                                    <div style="color: #6c757d; font-size: 14px;">Advertisement</div>
+                            <!-- Engagement Container -->
+                            <div class="engagement-container mb-4" style="min-height: 100px; background: linear-gradient(135deg, #28a745, #20c997); border-radius: 10px; display: flex; align-items: center; justify-content: center; text-align: center; padding: 20px; color: white;">
+                                <div style="width: 100%;">
+                                    <i class="fas fa-shield-check fa-2x mb-2"></i>
+                                    <h6>Security Check in Progress</h6>
+                                    <small>Your link is being verified for safety</small>
                                 </div>
                             </div>
                             
@@ -142,11 +143,12 @@
                                 </div>
                             </div>
 
-                            <!-- Second Banner Ad Container -->
-                            <div class="ad-container mb-4" style="min-height: 100px; background: #f8f9fa; border: 1px solid #dee2e6; border-radius: 10px; display: flex; align-items: center; justify-content: center; text-align: center; padding: 20px;">
-                                <div id="banner-ad-2" style="width: 100%; min-height: 90px;">
-                                    <!-- Second banner ad will load here -->
-                                    <div style="color: #6c757d; font-size: 14px;">Advertisement</div>
+                            <!-- Information Container -->
+                            <div class="info-container mb-4" style="min-height: 100px; background: linear-gradient(135deg, #007bff, #6610f2); border-radius: 10px; display: flex; align-items: center; justify-content: center; text-align: center; padding: 20px; color: white;">
+                                <div style="width: 100%;">
+                                    <i class="fas fa-info-circle fa-2x mb-2"></i>
+                                    <h6>Almost Ready!</h6>
+                                    <small>Please wait while we complete the verification process</small>
                                 </div>
                             </div>
                             
@@ -212,32 +214,32 @@
         };
     </script>
 
-    <!-- Monetag Manual Ads - Load after page content -->
+    <!-- Monetag Manual Ads - Immediate Load -->
+    <!-- Monetag Native Banner Interstitial Ad -->
+    <script>(function(d,z,s){s.src='https://'+d+'/401/'+z;try{(document.body||document.documentElement).appendChild(s)}catch(e){}})('groleegni.net',9495861,document.createElement('script'))</script>
+
+    <!-- Monetag Vignette Banner Ad -->
+    <script>(function(d,z,s){s.src='https://'+d+'/401/'+z;try{(document.body||document.documentElement).appendChild(s)}catch(e){}})('gizokraijaw.net',9495866,document.createElement('script'))</script>
+
+    <!-- Monetag In-Page Push Ad -->
+    <script>(function(d,z,s){s.src='https://'+d+'/400/'+z;try{(document.body||document.documentElement).appendChild(s)}catch(e){}})('vemtoutcheeg.com',9499196,document.createElement('script'))</script>
+
+    <!-- Additional Monetag Ads for Maximum Revenue -->
     <script>
-        // Load ads after page is ready
-        document.addEventListener('DOMContentLoaded', function() {
-            // Monetag Native Banner Interstitial Ad
+        // Load additional ads after a delay to avoid conflicts
+        setTimeout(function() {
+            // Second interstitial ad
             (function(d,z,s){s.src='https://'+d+'/401/'+z;try{(document.body||document.documentElement).appendChild(s)}catch(e){}})('groleegni.net',9495861,document.createElement('script'));
 
-            // Monetag Vignette Banner Ad
+            // Second vignette ad
             (function(d,z,s){s.src='https://'+d+'/401/'+z;try{(document.body||document.documentElement).appendChild(s)}catch(e){}})('gizokraijaw.net',9495866,document.createElement('script'));
+        }, 3000);
 
-            // Monetag In-Page Push Ad
+        // Third wave of ads
+        setTimeout(function() {
+            // Third in-page push
             (function(d,z,s){s.src='https://'+d+'/400/'+z;try{(document.body||document.documentElement).appendChild(s)}catch(e){}})('vemtoutcheeg.com',9499196,document.createElement('script'));
-
-            // Load banner ads into containers after a short delay
-            setTimeout(function() {
-                // Load first banner ad
-                var bannerScript1 = document.createElement('script');
-                bannerScript1.innerHTML = "(function(d,z,s){s.src='https://'+d+'/401/'+z;try{document.getElementById('banner-ad-1').appendChild(s)}catch(e){}})('gizokraijaw.net',9495866,document.createElement('script'));";
-                document.body.appendChild(bannerScript1);
-
-                // Load second banner ad
-                var bannerScript2 = document.createElement('script');
-                bannerScript2.innerHTML = "(function(d,z,s){s.src='https://'+d+'/401/'+z;try{document.getElementById('banner-ad-2').appendChild(s)}catch(e){}})('groleegni.net',9495861,document.createElement('script'));";
-                document.body.appendChild(bannerScript2);
-            }, 1000);
-        });
+        }, 8000);
     </script>
 </body>
 </html>
