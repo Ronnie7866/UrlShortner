@@ -15,7 +15,7 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/style.css?v=3.1">
     
     <style>
         body {
@@ -84,6 +84,19 @@
         }
         .page-dot.completed {
             background: #28a745;
+        }
+
+        /* Fix for Monetag interstitial ads */
+        .monetag-interstitial,
+        [id*="monetag"],
+        [class*="monetag"] {
+            z-index: 999999 !important;
+            position: fixed !important;
+        }
+
+        /* Ensure ad overlays work properly */
+        body.monetag-active {
+            overflow: hidden !important;
         }
     </style>
 </head>
@@ -203,7 +216,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
     <!-- Intermediate Page JS -->
-    <script src="/static/js/intermediate.js?v=2"></script>
+    <script src="/static/js/intermediate.js?v=3.1"></script>
 
     <script>
         // Pass data to JavaScript
@@ -214,32 +227,37 @@
         };
     </script>
 
-    <!-- Monetag Manual Ads - Immediate Load -->
-    <!-- Monetag Native Banner Interstitial Ad -->
-    <script>(function(d,z,s){s.src='https://'+d+'/401/'+z;try{(document.body||document.documentElement).appendChild(s)}catch(e){}})('groleegni.net',9495861,document.createElement('script'))</script>
-
-    <!-- Monetag Vignette Banner Ad -->
-    <script>(function(d,z,s){s.src='https://'+d+'/401/'+z;try{(document.body||document.documentElement).appendChild(s)}catch(e){}})('gizokraijaw.net',9495866,document.createElement('script'))</script>
-
-    <!-- Monetag In-Page Push Ad -->
-    <script>(function(d,z,s){s.src='https://'+d+'/400/'+z;try{(document.body||document.documentElement).appendChild(s)}catch(e){}})('vemtoutcheeg.com',9499196,document.createElement('script'))</script>
-
-    <!-- Additional Monetag Ads for Maximum Revenue -->
+    <!-- Monetag Manual Ads - Optimized for Intermediate Pages -->
     <script>
-        // Load additional ads after a delay to avoid conflicts
-        setTimeout(function() {
-            // Second interstitial ad
-            (function(d,z,s){s.src='https://'+d+'/401/'+z;try{(document.body||document.documentElement).appendChild(s)}catch(e){}})('groleegni.net',9495861,document.createElement('script'));
+        // Load ads with proper timing to avoid conflicts
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load vignette banner first (works best on intermediate pages)
+            setTimeout(function() {
+                (function(d,z,s){s.src='https://'+d+'/401/'+z;try{(document.body||document.documentElement).appendChild(s)}catch(e){}})('gizokraijaw.net',9495866,document.createElement('script'));
+            }, 1000);
 
-            // Second vignette ad
-            (function(d,z,s){s.src='https://'+d+'/401/'+z;try{(document.body||document.documentElement).appendChild(s)}catch(e){}})('gizokraijaw.net',9495866,document.createElement('script'));
-        }, 3000);
+            // Load in-page push after vignette
+            setTimeout(function() {
+                (function(d,z,s){s.src='https://'+d+'/400/'+z;try{(document.body||document.documentElement).appendChild(s)}catch(e){}})('vemtoutcheeg.com',9499196,document.createElement('script'));
+            }, 3000);
 
-        // Third wave of ads
-        setTimeout(function() {
-            // Third in-page push
-            (function(d,z,s){s.src='https://'+d+'/400/'+z;try{(document.body||document.documentElement).appendChild(s)}catch(e){}})('vemtoutcheeg.com',9499196,document.createElement('script'));
-        }, 8000);
+            // Load interstitial only on specific pages to avoid conflicts
+            if (window.pageData && (window.pageData.page === 2 || window.pageData.page === 4)) {
+                setTimeout(function() {
+                    (function(d,z,s){s.src='https://'+d+'/401/'+z;try{(document.body||document.documentElement).appendChild(s)}catch(e){}})('groleegni.net',9495861,document.createElement('script'));
+                }, 5000);
+            }
+
+            // Additional vignette for maximum revenue (mid-timer)
+            setTimeout(function() {
+                (function(d,z,s){s.src='https://'+d+'/401/'+z;try{(document.body||document.documentElement).appendChild(s)}catch(e){}})('gizokraijaw.net',9495866,document.createElement('script'));
+            }, 8000);
+
+            // Final push ad before timer ends
+            setTimeout(function() {
+                (function(d,z,s){s.src='https://'+d+'/400/'+z;try{(document.body||document.documentElement).appendChild(s)}catch(e){}})('vemtoutcheeg.com',9499196,document.createElement('script'));
+            }, 12000);
+        });
     </script>
 </body>
 </html>
