@@ -222,7 +222,7 @@ async function checkSchedulerStatus() {
         if (response.ok) {
             const data = await response.json();
             const statusElement = document.getElementById('scheduler-status');
-            if (data.is_running) {
+            if (data.scheduler_running) {
                 statusElement.innerHTML = '<span class="badge bg-success">Scheduler is running</span>';
             } else {
                 statusElement.innerHTML = '<span class="badge bg-danger">Scheduler is not running</span>';
