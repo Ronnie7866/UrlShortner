@@ -166,13 +166,49 @@ class IntermediatePage {
 
             const data = await response.json();
 
-            // Handle response
+            // Direct Link Ad Integration - Open in new tab for better UX
             if (data.redirect) {
-                // Final redirect
-                window.location.href = data.redirect;
+                // Final redirect - Open direct link ad in new tab, then redirect
+                const directLinkUrl = 'https://violationtones.com/vwh3k6pwkv?key=53274b8825d29e20912b29cf21df8bc9';
+                const finalUrl = encodeURIComponent(data.redirect);
+
+                // Show user feedback
+                continueBtn.innerHTML = '<i class="fas fa-external-link-alt"></i> Opening Link...';
+
+                // Open ad in new tab
+                window.open(`${directLinkUrl}&url=${finalUrl}`, '_blank');
+
+                // Update button text
+                continueBtn.innerHTML = '<i class="fas fa-check"></i> Redirecting...';
+
+                // Small delay then redirect to final URL
+                setTimeout(() => {
+                    window.location.href = data.redirect;
+                }, 1500);
+
             } else if (data.next_page) {
-                // Go to next intermediate page
-                window.location.href = `/${this.shortCode}/page/${data.next_page}`;
+                // Go to next intermediate page - Use direct link for page 2 and 4
+                if (this.page === 2 || this.page === 4) {
+                    const directLinkUrl = 'https://violationtones.com/vwh3k6pwkv?key=53274b8825d29e20912b29cf21df8bc9';
+                    const nextPageUrl = encodeURIComponent(`${window.location.origin}/${this.shortCode}/page/${data.next_page}`);
+
+                    // Show user feedback
+                    continueBtn.innerHTML = '<i class="fas fa-external-link-alt"></i> Opening...';
+
+                    // Open ad in new tab
+                    window.open(`${directLinkUrl}&url=${nextPageUrl}`, '_blank');
+
+                    // Update button text
+                    continueBtn.innerHTML = '<i class="fas fa-arrow-right"></i> Proceeding...';
+
+                    // Small delay then navigate to next page
+                    setTimeout(() => {
+                        window.location.href = `/${this.shortCode}/page/${data.next_page}`;
+                    }, 1200);
+                } else {
+                    // Direct navigation for pages 1 and 3
+                    window.location.href = `/${this.shortCode}/page/${data.next_page}`;
+                }
             }
 
         } catch (error) {
