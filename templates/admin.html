@@ -5,19 +5,35 @@
 {% block content %}
 <div class="container mt-4">
 
-    <!-- Banner Ad 728x90 - Top of Admin Page -->
+    <!-- MOBILE-FIRST: Admin Page Top Ad (90% Mobile Traffic) -->
     <div class="row mb-4">
         <div class="col-12 text-center">
-            <script type="text/javascript">
-                atOptions = {
-                    'key' : '3c47c0bda68f1da52fd5e6ca14ff2f47',
-                    'format' : 'iframe',
-                    'height' : 90,
-                    'width' : 728,
-                    'params' : {}
-                };
-            </script>
-            <script type="text/javascript" src="//violationtones.com/3c47c0bda68f1da52fd5e6ca14ff2f47/invoke.js"></script>
+            <!-- Mobile Banner 320x50 (Primary Revenue) -->
+            <div class="d-block d-lg-none">
+                <script type="text/javascript">
+                    atOptions = {
+                        'key' : 'b5246cd3c56fd524c3b1d829a8c1c7cf',
+                        'format' : 'iframe',
+                        'height' : 50,
+                        'width' : 320,
+                        'params' : {}
+                    };
+                </script>
+                <script type="text/javascript" src="//violationtones.com/b5246cd3c56fd524c3b1d829a8c1c7cf/invoke.js"></script>
+            </div>
+            <!-- Desktop Banner 728x90 (Fallback) -->
+            <div class="d-none d-lg-block">
+                <script type="text/javascript">
+                    atOptions = {
+                        'key' : '3c47c0bda68f1da52fd5e6ca14ff2f47',
+                        'format' : 'iframe',
+                        'height' : 90,
+                        'width' : 728,
+                        'params' : {}
+                    };
+                </script>
+                <script type="text/javascript" src="//violationtones.com/3c47c0bda68f1da52fd5e6ca14ff2f47/invoke.js"></script>
+            </div>
         </div>
     </div>
 

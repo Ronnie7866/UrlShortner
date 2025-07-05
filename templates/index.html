@@ -5,19 +5,35 @@
 {% block content %}
 <div class="container mt-5">
 
-    <!-- Banner Ad 728x90 - Top of Homepage -->
+    <!-- MOBILE-FIRST: Top Homepage Ad (90% Mobile Traffic) -->
     <div class="row mb-4">
         <div class="col-12 text-center">
-            <script type="text/javascript">
-                atOptions = {
-                    'key' : '3c47c0bda68f1da52fd5e6ca14ff2f47',
-                    'format' : 'iframe',
-                    'height' : 90,
-                    'width' : 728,
-                    'params' : {}
-                };
-            </script>
-            <script type="text/javascript" src="//violationtones.com/3c47c0bda68f1da52fd5e6ca14ff2f47/invoke.js"></script>
+            <!-- Mobile Banner 320x50 (Primary Revenue - 90% users) -->
+            <div class="d-block d-lg-none">
+                <script type="text/javascript">
+                    atOptions = {
+                        'key' : 'b5246cd3c56fd524c3b1d829a8c1c7cf',
+                        'format' : 'iframe',
+                        'height' : 50,
+                        'width' : 320,
+                        'params' : {}
+                    };
+                </script>
+                <script type="text/javascript" src="//violationtones.com/b5246cd3c56fd524c3b1d829a8c1c7cf/invoke.js"></script>
+            </div>
+            <!-- Desktop Banner 728x90 (Fallback - 10% users) -->
+            <div class="d-none d-lg-block">
+                <script type="text/javascript">
+                    atOptions = {
+                        'key' : '3c47c0bda68f1da52fd5e6ca14ff2f47',
+                        'format' : 'iframe',
+                        'height' : 90,
+                        'width' : 728,
+                        'params' : {}
+                    };
+                </script>
+                <script type="text/javascript" src="//violationtones.com/3c47c0bda68f1da52fd5e6ca14ff2f47/invoke.js"></script>
+            </div>
         </div>
     </div>
 
@@ -93,18 +109,34 @@
                 </div>
             </div>
 
-            <!-- Banner Ad 468x60 - Content Break -->
+            <!-- MOBILE-FIRST: Content Break Ad -->
             <div class="text-center mt-4">
-                <script type="text/javascript">
-                    atOptions = {
-                        'key' : 'c47ccb66c1a48fe021c9f216fc18b306',
-                        'format' : 'iframe',
-                        'height' : 60,
-                        'width' : 468,
-                        'params' : {}
-                    };
-                </script>
-                <script type="text/javascript" src="//violationtones.com/c47ccb66c1a48fe021c9f216fc18b306/invoke.js"></script>
+                <!-- Mobile Banner 320x50 (Primary Revenue) -->
+                <div class="d-block d-lg-none">
+                    <script type="text/javascript">
+                        atOptions = {
+                            'key' : 'b5246cd3c56fd524c3b1d829a8c1c7cf',
+                            'format' : 'iframe',
+                            'height' : 50,
+                            'width' : 320,
+                            'params' : {}
+                        };
+                    </script>
+                    <script type="text/javascript" src="//violationtones.com/b5246cd3c56fd524c3b1d829a8c1c7cf/invoke.js"></script>
+                </div>
+                <!-- Desktop Banner 468x60 (Fallback) -->
+                <div class="d-none d-lg-block">
+                    <script type="text/javascript">
+                        atOptions = {
+                            'key' : 'c47ccb66c1a48fe021c9f216fc18b306',
+                            'format' : 'iframe',
+                            'height' : 60,
+                            'width' : 468,
+                            'params' : {}
+                        };
+                    </script>
+                    <script type="text/javascript" src="//violationtones.com/c47ccb66c1a48fe021c9f216fc18b306/invoke.js"></script>
+                </div>
             </div>
 
             <!-- Banner Ad 300x250 - Bottom of Homepage -->

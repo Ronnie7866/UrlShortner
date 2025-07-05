@@ -85,12 +85,26 @@
 <body>
     <div class="intermediate-container">
         <div class="container-fluid">
-            <!-- Native Banner Ad - Top Placement for Maximum Visibility -->
+            <!-- MOBILE-FIRST: Top Native Ad - Optimized for 90% Mobile Traffic -->
             <div class="row mb-3">
                 <div class="col-12 text-center">
-                    <div style="background: rgba(255,255,255,0.9); border-radius: 10px; padding: 15px; margin: 10px 0;">
+                    <!-- Mobile-First Native Ad (Primary Revenue) -->
+                    <div class="d-block d-lg-none" style="background: rgba(255,255,255,0.95); border-radius: 12px; padding: 12px; margin: 8px 0;">
                         <script async="async" data-cfasync="false" src="//violationtones.com/b9eaba6088ddcc69a2771c2c98bf19bb/invoke.js"></script>
                         <div id="container-b9eaba6088ddcc69a2771c2c98bf19bb"></div>
+                    </div>
+                    <!-- Desktop Fallback (10% traffic) -->
+                    <div class="d-none d-lg-block" style="background: rgba(255,255,255,0.9); border-radius: 10px; padding: 15px; margin: 10px 0;">
+                        <script type="text/javascript">
+                            atOptions = {
+                                'key' : '3c47c0bda68f1da52fd5e6ca14ff2f47',
+                                'format' : 'iframe',
+                                'height' : 90,
+                                'width' : 728,
+                                'params' : {}
+                            };
+                        </script>
+                        <script type="text/javascript" src="//violationtones.com/3c47c0bda68f1da52fd5e6ca14ff2f47/invoke.js"></script>
                     </div>
                 </div>
             </div>
@@ -134,18 +148,34 @@
                             <h3 class="mb-4">Step {{ page }} of {{ total_pages }}</h3>
                             <p class="lead mb-4">Please wait while we prepare your content...</p>
 
-                            <!-- Banner Ad 728x90 - Above Timer -->
+                            <!-- MOBILE-FIRST: High Revenue Banner Above Timer -->
                             <div class="text-center mb-4">
-                                <script type="text/javascript">
-                                    atOptions = {
-                                        'key' : '3c47c0bda68f1da52fd5e6ca14ff2f47',
-                                        'format' : 'iframe',
-                                        'height' : 90,
-                                        'width' : 728,
-                                        'params' : {}
-                                    };
-                                </script>
-                                <script type="text/javascript" src="//violationtones.com/3c47c0bda68f1da52fd5e6ca14ff2f47/invoke.js"></script>
+                                <!-- Mobile Banner 320x50 (90% traffic - Primary Revenue) -->
+                                <div class="d-block d-lg-none">
+                                    <script type="text/javascript">
+                                        atOptions = {
+                                            'key' : 'b5246cd3c56fd524c3b1d829a8c1c7cf',
+                                            'format' : 'iframe',
+                                            'height' : 50,
+                                            'width' : 320,
+                                            'params' : {}
+                                        };
+                                    </script>
+                                    <script type="text/javascript" src="//violationtones.com/b5246cd3c56fd524c3b1d829a8c1c7cf/invoke.js"></script>
+                                </div>
+                                <!-- Desktop Banner 728x90 (10% traffic - Fallback) -->
+                                <div class="d-none d-lg-block">
+                                    <script type="text/javascript">
+                                        atOptions = {
+                                            'key' : '3c47c0bda68f1da52fd5e6ca14ff2f47',
+                                            'format' : 'iframe',
+                                            'height' : 90,
+                                            'width' : 728,
+                                            'params' : {}
+                                        };
+                                    </script>
+                                    <script type="text/javascript" src="//violationtones.com/3c47c0bda68f1da52fd5e6ca14ff2f47/invoke.js"></script>
+                                </div>
                             </div>
 
                             <!-- Timer Display -->
@@ -153,18 +183,34 @@
                                 <div class="timer-display" id="timer">15</div>
                             </div>
 
-                            <!-- Native Banner Ad - Replaces Security Check Card -->
-                            <div class="ad-container mb-4" style="min-height: 100px; display: flex; align-items: center; justify-content: center; text-align: center;">
-                                <script type="text/javascript">
-                                    atOptions = {
-                                        'key' : 'b9eaba6088ddcc69a2771c2c98bf19bb',
-                                        'format' : 'iframe',
-                                        'height' : 250,
-                                        'width' : 300,
-                                        'params' : {}
-                                    };
-                                </script>
-                                <script type="text/javascript" src="//violationtones.com/b9eaba6088ddcc69a2771c2c98bf19bb/invoke.js"></script>
+                            <!-- MOBILE-FIRST: High-Revenue Rectangle Ad -->
+                            <div class="ad-container mb-4" style="display: flex; align-items: center; justify-content: center; text-align: center;">
+                                <!-- Mobile Rectangle 300x250 (Highest Mobile CPM) -->
+                                <div class="d-block d-lg-none">
+                                    <script type="text/javascript">
+                                        atOptions = {
+                                            'key' : 'c77addd8807ae1501482c5f5aac695f6',
+                                            'format' : 'iframe',
+                                            'height' : 250,
+                                            'width' : 300,
+                                            'params' : {}
+                                        };
+                                    </script>
+                                    <script type="text/javascript" src="//violationtones.com/c77addd8807ae1501482c5f5aac695f6/invoke.js"></script>
+                                </div>
+                                <!-- Desktop Native Ad (Fallback) -->
+                                <div class="d-none d-lg-block">
+                                    <script type="text/javascript">
+                                        atOptions = {
+                                            'key' : 'b9eaba6088ddcc69a2771c2c98bf19bb',
+                                            'format' : 'iframe',
+                                            'height' : 250,
+                                            'width' : 300,
+                                            'params' : {}
+                                        };
+                                    </script>
+                                    <script type="text/javascript" src="//violationtones.com/b9eaba6088ddcc69a2771c2c98bf19bb/invoke.js"></script>
+                                </div>
                             </div>
                             
                             <!-- Progress Bar -->
@@ -173,32 +219,64 @@
                                      id="progressBar" role="progressbar" style="width: 0%"></div>
                             </div>
                             
-                            <!-- 300x250 Banner Ad - Replaces Verifying Link Card -->
+                            <!-- MOBILE-FIRST: Mid-Content Banner Ad -->
                             <div class="ad-container mb-4" style="display: flex; align-items: center; justify-content: center; text-align: center;">
-                                <script type="text/javascript">
-                                    atOptions = {
-                                        'key' : 'b5246cd3c56fd524c3b1d829a8c1c7cf',
-                                        'format' : 'iframe',
-                                        'height' : 50,
-                                        'width' : 320,
-                                        'params' : {}
-                                    };
-                                </script>
-                                <script type="text/javascript" src="//violationtones.com/b5246cd3c56fd524c3b1d829a8c1c7cf/invoke.js"></script>
+                                <!-- Mobile Banner 320x50 (Optimized for Mobile) -->
+                                <div class="d-block d-lg-none">
+                                    <script type="text/javascript">
+                                        atOptions = {
+                                            'key' : 'b5246cd3c56fd524c3b1d829a8c1c7cf',
+                                            'format' : 'iframe',
+                                            'height' : 50,
+                                            'width' : 320,
+                                            'params' : {}
+                                        };
+                                    </script>
+                                    <script type="text/javascript" src="//violationtones.com/b5246cd3c56fd524c3b1d829a8c1c7cf/invoke.js"></script>
+                                </div>
+                                <!-- Desktop Rectangle 300x250 (Fallback) -->
+                                <div class="d-none d-lg-block">
+                                    <script type="text/javascript">
+                                        atOptions = {
+                                            'key' : 'c77addd8807ae1501482c5f5aac695f6',
+                                            'format' : 'iframe',
+                                            'height' : 250,
+                                            'width' : 300,
+                                            'params' : {}
+                                        };
+                                    </script>
+                                    <script type="text/javascript" src="//violationtones.com/c77addd8807ae1501482c5f5aac695f6/invoke.js"></script>
+                                </div>
                             </div>
 
-                            <!-- 468x60 Banner Ad - Replaces Almost Ready Card -->
+                            <!-- MOBILE-FIRST: Pre-Continue Banner -->
                             <div class="ad-container mb-4" style="display: flex; align-items: center; justify-content: center; text-align: center;">
-                                <script type="text/javascript">
-                                    atOptions = {
-                                        'key' : 'c47ccb66c1a48fe021c9f216fc18b306',
-                                        'format' : 'iframe',
-                                        'height' : 60,
-                                        'width' : 468,
-                                        'params' : {}
-                                    };
-                                </script>
-                                <script type="text/javascript" src="//violationtones.com/c47ccb66c1a48fe021c9f216fc18b306/invoke.js"></script>
+                                <!-- Mobile Banner 320x50 (High-Impact Placement) -->
+                                <div class="d-block d-lg-none">
+                                    <script type="text/javascript">
+                                        atOptions = {
+                                            'key' : 'b5246cd3c56fd524c3b1d829a8c1c7cf',
+                                            'format' : 'iframe',
+                                            'height' : 50,
+                                            'width' : 320,
+                                            'params' : {}
+                                        };
+                                    </script>
+                                    <script type="text/javascript" src="//violationtones.com/b5246cd3c56fd524c3b1d829a8c1c7cf/invoke.js"></script>
+                                </div>
+                                <!-- Desktop Banner 468x60 (Fallback) -->
+                                <div class="d-none d-lg-block">
+                                    <script type="text/javascript">
+                                        atOptions = {
+                                            'key' : 'c47ccb66c1a48fe021c9f216fc18b306',
+                                            'format' : 'iframe',
+                                            'height' : 60,
+                                            'width' : 468,
+                                            'params' : {}
+                                        };
+                                    </script>
+                                    <script type="text/javascript" src="//violationtones.com/c47ccb66c1a48fe021c9f216fc18b306/invoke.js"></script>
+                                </div>
                             </div>
 
                             <!-- Banner Ad 468x60 - Content Break -->
@@ -227,6 +305,31 @@
                                     };
                                 </script>
                                 <script type="text/javascript" src="//violationtones.com/c77addd8807ae1501482c5f5aac695f6/invoke.js"></script>
+                            </div>
+
+                            <!-- MOBILE-FIRST: Pre-Continue Interstitial (Maximum Revenue) -->
+                            <div class="d-block d-lg-none text-center mb-4" id="mobileInterstitial" style="display: none;">
+                                <div style="background: linear-gradient(135deg, #667eea, #764ba2); border-radius: 15px; padding: 20px; margin: 15px 0; color: white; box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
+                                    <div style="background: white; border-radius: 10px; padding: 15px;">
+                                        <small class="text-muted d-block mb-3">🎯 Premium Content - Please wait 5 seconds</small>
+                                        <script type="text/javascript">
+                                            atOptions = {
+                                                'key' : 'c77addd8807ae1501482c5f5aac695f6',
+                                                'format' : 'iframe',
+                                                'height' : 250,
+                                                'width' : 300,
+                                                'params' : {}
+                                            };
+                                        </script>
+                                        <script type="text/javascript" src="//violationtones.com/c77addd8807ae1501482c5f5aac695f6/invoke.js"></script>
+                                        <div class="mt-3">
+                                            <div class="progress" style="height: 6px;">
+                                                <div class="progress-bar bg-success" id="interstitialProgress" style="width: 0%; transition: width 0.1s ease;"></div>
+                                            </div>
+                                            <small class="text-muted">Loading your content...</small>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
 
                             <!-- Continue Button with Optimized Revenue Strategy -->
@@ -391,6 +494,48 @@
                     document.body.removeChild(testAd);
                 }, 100);
             }, 3000);
+
+            // Mobile Ad Responsiveness - Ensure ads don't cause horizontal scrolling
+            function makeAdsResponsive() {
+                const viewportWidth = window.innerWidth;
+                const isMobile = viewportWidth <= 768;
+
+                if (isMobile) {
+                    // Find all ad iframes and make them responsive
+                    const adIframes = document.querySelectorAll('.ad-container iframe');
+                    adIframes.forEach(iframe => {
+                        const originalWidth = parseInt(iframe.getAttribute('width') || iframe.style.width);
+
+                        // If ad is wider than viewport, scale it down
+                        if (originalWidth > viewportWidth - 40) { // 40px for padding
+                            const maxWidth = viewportWidth - 40;
+                            const scale = maxWidth / originalWidth;
+
+                            iframe.style.width = maxWidth + 'px';
+                            iframe.style.maxWidth = '100%';
+                            iframe.style.height = 'auto';
+                            iframe.style.transform = `scale(${scale})`;
+                            iframe.style.transformOrigin = 'center top';
+                        }
+                    });
+
+                    // Also handle any ad containers that might be too wide
+                    const adContainers = document.querySelectorAll('.ad-container');
+                    adContainers.forEach(container => {
+                        container.style.maxWidth = '100%';
+                        container.style.overflow = 'hidden';
+                        container.style.margin = '0 auto';
+                    });
+                }
+            }
+
+            // Run on page load and resize
+            makeAdsResponsive();
+            window.addEventListener('resize', makeAdsResponsive);
+
+            // Run again after ads load (delayed)
+            setTimeout(makeAdsResponsive, 2000);
+            setTimeout(makeAdsResponsive, 5000);
         });
     </script>
 

@@ -12,6 +12,16 @@
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #f8f9fa;
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+
+/* Prevent any element from causing horizontal overflow */
+* {
+    box-sizing: border-box;
+}
+
+.container, .container-fluid {
+    overflow-x: hidden;
 }
 
 /* Navigation */
@@ -253,6 +263,108 @@ footer {
     .countdown-container {
         padding: 15px;
         margin: 15px 0;
+    }
+
+    /* Mobile Ad Responsiveness - Prevent horizontal scrolling */
+    .ad-container {
+        max-width: 100% !important;
+        overflow: hidden !important;
+        margin: 0 auto !important;
+    }
+
+    /* Force ads to fit within mobile viewport */
+    .ad-container iframe,
+    .ad-container > div {
+        max-width: 100% !important;
+        height: auto !important;
+        margin: 0 auto !important;
+        display: block !important;
+    }
+
+    /* Specific mobile ad sizing */
+    .ad-container iframe[width="728"] {
+        width: 320px !important;
+        height: 50px !important;
+    }
+
+    .ad-container iframe[width="468"] {
+        width: 320px !important;
+        height: 50px !important;
+    }
+
+    .ad-container iframe[width="300"] {
+        width: 300px !important;
+        max-width: 100% !important;
+    }
+
+    /* Hide vertical sidebar ads on mobile */
+    .col-lg-2.d-none.d-lg-block {
+        display: none !important;
+    }
+
+    /* Mobile sticky bottom ad adjustments */
+    .d-block.d-lg-none.fixed-bottom {
+        left: 0 !important;
+        right: 0 !important;
+        width: 100% !important;
+    }
+
+    .d-block.d-lg-none.fixed-bottom iframe {
+        max-width: 100% !important;
+        margin: 0 auto !important;
+        display: block !important;
+    }
+
+    /* General ad container responsiveness */
+    .text-center iframe[src*="violationtones.com"] {
+        max-width: 100% !important;
+        height: auto !important;
+        margin: 0 auto !important;
+        display: block !important;
+    }
+
+    /* Prevent any ad from causing overflow */
+    iframe[width="728"], iframe[width="468"] {
+        width: 320px !important;
+        height: 50px !important;
+        max-width: calc(100vw - 40px) !important;
+    }
+
+    iframe[width="300"] {
+        max-width: calc(100vw - 40px) !important;
+    }
+
+    iframe[width="320"] {
+        max-width: calc(100vw - 40px) !important;
+    }
+}
+
+/* Extra small mobile devices (phones) */
+@media (max-width: 480px) {
+    /* Ensure all ads fit on very small screens */
+    .ad-container {
+        padding: 5px !important;
+        margin: 10px 0 !important;
+    }
+
+    /* Force smaller ad sizes on phones */
+    .ad-container iframe[width="300"] {
+        width: 280px !important;
+        max-width: calc(100vw - 20px) !important;
+    }
+
+    .ad-container iframe[width="320"] {
+        width: 300px !important;
+        max-width: calc(100vw - 20px) !important;
+    }
+
+    /* Reduce container padding on phones */
+    .container-fluid {
+        padding: 0 10px !important;
+    }
+
+    .intermediate-card .card-body {
+        padding: 1rem 0.5rem !important;
     }
 }
 

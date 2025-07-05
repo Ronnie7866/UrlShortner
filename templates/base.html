@@ -57,6 +57,127 @@
     <!-- Social Bar Ad - All Pages -->
     <script type='text/javascript' src='//violationtones.com/43/8f/a5/438fa524d4342a132b9a0bc734e61d56.js'></script>
 
+    <!-- MOBILE-FIRST Ad Optimization Script - 90% Mobile Traffic -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const isMobile = window.innerWidth <= 768;
+
+            // Mobile-First Ad Loading Strategy
+            function optimizeAdLoading() {
+                if (isMobile) {
+                    // Priority load mobile ads first (90% of traffic)
+                    const mobileAds = document.querySelectorAll('.d-block.d-lg-none script[src*="violationtones.com"]');
+                    mobileAds.forEach((script, index) => {
+                        // Stagger mobile ad loading for better performance
+                        setTimeout(() => {
+                            if (!script.hasAttribute('data-loaded')) {
+                                script.setAttribute('data-loaded', 'true');
+                                // Force reload if needed
+                                const newScript = document.createElement('script');
+                                newScript.src = script.src;
+                                script.parentNode.insertBefore(newScript, script.nextSibling);
+                            }
+                        }, index * 300); // 300ms between each mobile ad
+                    });
+
+                    // Hide desktop ads completely on mobile for faster loading
+                    const desktopAds = document.querySelectorAll('.d-none.d-lg-block');
+                    desktopAds.forEach(ad => {
+                        ad.style.display = 'none !important';
+                    });
+                } else {
+                    // Desktop: Load desktop ads with delay
+                    const desktopAds = document.querySelectorAll('.d-none.d-lg-block script[src*="violationtones.com"]');
+                    desktopAds.forEach((script, index) => {
+                        setTimeout(() => {
+                            if (!script.hasAttribute('data-loaded')) {
+                                script.setAttribute('data-loaded', 'true');
+                            }
+                        }, index * 500); // 500ms between desktop ads
+                    });
+                }
+            }
+
+            // Mobile Ad Responsiveness - Ensure ads don't cause horizontal scrolling
+            function makeAdsResponsive() {
+                const viewportWidth = window.innerWidth;
+
+                if (isMobile) {
+                    // Find all ad iframes and make them responsive
+                    const adIframes = document.querySelectorAll('iframe[src*="violationtones.com"]');
+                    adIframes.forEach(iframe => {
+                        const originalWidth = parseInt(iframe.getAttribute('width') || iframe.style.width);
+
+                        // If ad is wider than viewport, scale it down
+                        if (originalWidth > viewportWidth - 40) { // 40px for padding
+                            const maxWidth = viewportWidth - 40;
+                            const scale = maxWidth / originalWidth;
+
+                            iframe.style.width = maxWidth + 'px';
+                            iframe.style.maxWidth = '100%';
+                            iframe.style.height = 'auto';
+                            iframe.style.transform = `scale(${scale})`;
+                            iframe.style.transformOrigin = 'center top';
+                            iframe.style.margin = '0 auto';
+                            iframe.style.display = 'block';
+                        }
+                    });
+
+                    // Also handle any ad containers that might be too wide
+                    const adContainers = document.querySelectorAll('.text-center, .ad-container');
+                    adContainers.forEach(container => {
+                        if (container.querySelector('iframe[src*="violationtones.com"]')) {
+                            container.style.maxWidth = '100%';
+                            container.style.overflow = 'hidden';
+                            container.style.margin = '0 auto';
+                        }
+                    });
+
+                    // Handle specific ad sizes that are problematic on mobile
+                    const wideAds = document.querySelectorAll('iframe[width="728"], iframe[width="468"]');
+                    wideAds.forEach(ad => {
+                        ad.style.width = '320px';
+                        ad.style.height = '50px';
+                        ad.style.maxWidth = '100%';
+                        ad.style.margin = '0 auto';
+                        ad.style.display = 'block';
+                    });
+                }
+            }
+
+            // Mobile-First Revenue Analytics
+            function trackMobileRevenue() {
+                if (isMobile) {
+                    // Track mobile ad impressions for revenue optimization
+                    const mobileAdContainers = document.querySelectorAll('.d-block.d-lg-none');
+                    console.log(`Mobile-First Strategy: ${mobileAdContainers.length} mobile ads loaded for 90% traffic`);
+
+                    // Track mobile interstitial engagement
+                    const interstitial = document.getElementById('mobileInterstitial');
+                    if (interstitial) {
+                        console.log('Mobile interstitial ready for maximum revenue');
+                    }
+                }
+            }
+
+            // Execute mobile-first optimization
+            optimizeAdLoading();
+            makeAdsResponsive();
+            trackMobileRevenue();
+
+            // Run on resize
+            window.addEventListener('resize', makeAdsResponsive);
+
+            // Run again after ads load (delayed for mobile priority)
+            setTimeout(() => {
+                makeAdsResponsive();
+                trackMobileRevenue();
+            }, isMobile ? 1000 : 3000); // Faster for mobile
+
+            setTimeout(makeAdsResponsive, isMobile ? 3000 : 5000);
+        });
+    </script>
+
     {% block extra_scripts %}{% endblock %}
 </body>
 </html>

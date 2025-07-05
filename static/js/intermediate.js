@@ -116,28 +116,64 @@ class IntermediatePage {
         if (this.timeLeft <= 0) {
             clearInterval(this.timerInterval);
 
-            // Enable continue button
-            continueBtn.disabled = false;
-            if (this.page === this.totalPages) {
-                continueBtn.innerHTML = '<i class="fas fa-arrow-right"></i> Get Link';
-            } else {
-                continueBtn.innerHTML = '<i class="fas fa-arrow-right"></i> Continue';
-            }
-            continueBtn.classList.add('btn-pulse');
+            // Show mobile interstitial for maximum revenue (90% mobile users)
+            this.showMobileInterstitial(() => {
+                // Enable continue button after interstitial
+                continueBtn.disabled = false;
+                if (this.page === this.totalPages) {
+                    continueBtn.innerHTML = '<i class="fas fa-arrow-right"></i> Get Link';
+                } else {
+                    continueBtn.innerHTML = '<i class="fas fa-arrow-right"></i> Continue';
+                }
+                continueBtn.classList.add('btn-pulse');
 
-            // Add pulse animation
-            continueBtn.style.animation = 'pulse 1.5s infinite';
+                // Add pulse animation
+                continueBtn.style.animation = 'pulse 1.5s infinite';
 
-            // Show completion message
-            timerDisplay.textContent = '✓';
-            timerDisplay.style.color = '#28a745';
-
-
+                // Show completion message
+                timerDisplay.textContent = '✓';
+                timerDisplay.style.color = '#28a745';
+            });
 
             return;
         }
 
         this.timeLeft--;
+    }
+
+    // Mobile-First Revenue: Show interstitial ad for 90% mobile users
+    showMobileInterstitial(callback) {
+        const isMobile = window.innerWidth <= 768;
+
+        if (isMobile) {
+            const interstitial = document.getElementById('mobileInterstitial');
+            const progressBar = document.getElementById('interstitialProgress');
+
+            if (interstitial && progressBar) {
+                // Show interstitial
+                interstitial.style.display = 'block';
+
+                // 5-second interstitial for maximum revenue
+                let interstitialTime = 5;
+                const interstitialInterval = setInterval(() => {
+                    const progress = ((5 - interstitialTime) / 5) * 100;
+                    progressBar.style.width = progress + '%';
+
+                    if (interstitialTime <= 0) {
+                        clearInterval(interstitialInterval);
+                        interstitial.style.display = 'none';
+                        callback();
+                    }
+
+                    interstitialTime--;
+                }, 1000);
+
+                return;
+            }
+        }
+
+        // Desktop or no interstitial - immediate callback
+        callback();
     }
 
     async handleContinue() {
