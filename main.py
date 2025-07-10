@@ -12,6 +12,7 @@ import json
 from apscheduler.schedulers.background import BackgroundScheduler
 from apscheduler.triggers.cron import CronTrigger
 import pytz
+from contextlib import asynccontextmanager
 
 from database import SessionLocal, engine
 from models import Base, ShortURL, Click
@@ -19,8 +20,6 @@ from schemas import URLCreate, URLResponse
 
 # Create tables
 Base.metadata.create_all(bind=engine)
-
-app = FastAPI(title="Personal URL Shortener")
 
 # Initialize scheduler
 scheduler = BackgroundScheduler()
@@ -44,17 +43,29 @@ def auto_reset_daily_data():
     finally:
         db.close()
 
-# Schedule the auto-reset for 12:00 AM IST daily
-scheduler.add_job(
-    auto_reset_daily_data,
-    CronTrigger(hour=0, minute=0, timezone=ist_timezone),
-    id='daily_reset',
-    name='Auto Reset Daily Data',
-    replace_existing=True
-)
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    # Startup
+    # Schedule the auto-reset for 12:00 AM IST daily
+    scheduler.add_job(
+        auto_reset_daily_data,
+        CronTrigger(hour=0, minute=0, timezone=ist_timezone),
+        id='daily_reset',
+        name='Auto Reset Daily Data',
+        replace_existing=True
+    )
 
-# Start the scheduler
-scheduler.start()
+    # Start the scheduler
+    scheduler.start()
+    print("Scheduler started successfully")
+
+    yield
+
+    # Shutdown
+    scheduler.shutdown()
+    print("Scheduler shutdown successfully")
+
+app = FastAPI(title="Personal URL Shortener", lifespan=lifespan)
 
 # Mount static files
 app.mount("/static", StaticFiles(directory="static"), name="static")
@@ -336,10 +347,7 @@ async def advance_page(short_code: str, request: Request, db: Session = Depends(
 
 
 
-# Shutdown event to stop scheduler
-@app.on_event("shutdown")
-def shutdown_event():
-    scheduler.shutdown()
+
 
 if __name__ == "__main__":
     import uvicorn
