@@ -3,53 +3,67 @@
 {% block title %}Please Wait - Page {{ page }} of {{ total_pages }}{% endblock %}
 
 {% block extra_head %}
+    <!-- Pop-under and Social Bar scripts with error handling -->
+    <script type='text/javascript'>
+        // Load popunder script with error handling
+        (function() {
+            var script = document.createElement('script');
+            script.type = 'text/javascript';
+            script.src = '//violationtones.com/5f/14/06/5f14061e3eb1712029fc0b3ac8f3034f.js';
+            script.onerror = function() {
+                console.log('Popunder script failed to load');
+            };
+            document.head.appendChild(script);
+        })();
+
+        // Load social bar script with error handling and retry
+        (function() {
+            var script = document.createElement('script');
+            script.type = 'text/javascript';
+            script.src = '//violationtones.com/43/8f/a5/438fa524d4342a132b9a0bc734e61d56.js';
+            script.async = true;
+            script.onload = function() {
+                console.log('Social bar script loaded successfully');
+            };
+            script.onerror = function() {
+                console.log('Social bar script failed to load, retrying...');
+                // Retry with direct script injection
+                setTimeout(function() {
+                    var retryScript = document.createElement('script');
+                    retryScript.type = 'text/javascript';
+                    retryScript.src = 'https://violationtones.com/43/8f/a5/438fa524d4342a132b9a0bc734e61d56.js';
+                    document.head.appendChild(retryScript);
+                }, 2000);
+            };
+            document.head.appendChild(script);
+        })();
+    </script>
     <style>
         body {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
             min-height: 100vh;
         }
         .intermediate-container {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            padding-top: 20px;
+            padding-bottom: 20px;
         }
         .intermediate-card {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
             border-radius: 20px;
             box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            padding: 2rem;
         }
         .progress-circle {
-            width: 150px;
-            height: 150px;
-            margin: 0 auto;
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 20px;
             position: relative;
         }
         .timer-display {
-            font-size: 3rem;
+            font-size: 2.5rem;
             font-weight: bold;
             color: #007bff;
-        }
-        .ad-space {
-            background: #f8f9fa;
-            border: 2px dashed #dee2e6;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #6c757d;
-            font-size: 1.1rem;
-        }
-        .continue-btn {
-            font-size: 1.2rem;
-            padding: 15px 40px;
-            border-radius: 50px;
-            transition: all 0.3s ease;
-        }
-        .continue-btn:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
         }
         .page-indicator {
             display: flex;
@@ -71,96 +85,480 @@
         .page-dot.completed {
             background: #28a745;
         }
+
+
+        /* Mobile-first improvements */
+        @media (max-width: 767px) {
+            .intermediate-container {
+                padding-top: 10px;
+                padding-bottom: 10px;
+            }
+
+            .intermediate-card {
+                padding: 1.5rem 1rem;
+                margin: 10px;
+                border-radius: 15px;
+            }
+
+
+
+            .timer-display {
+                font-size: 2rem;
+            }
+
+            .progress-circle {
+                width: 100px;
+                height: 100px;
+            }
+
+            /* Better mobile spacing */
+            .page-indicator {
+                margin-bottom: 15px;
+            }
+
+            .page-dot {
+                width: 10px;
+                height: 10px;
+            }
+
+            /* Mobile button improvements */
+            .continue-btn {
+                width: 100%;
+                padding: 15px;
+                font-size: 1.1rem;
+                border-radius: 10px;
+            }
+        }
     </style>
 {% endblock %}
 
 {% block content %}
-    <div class="intermediate-container">
-        <div class="container-fluid">
-            <div class="row">
-                <!-- Main Content -->
-                <div class="col-12">
-                    <div class="intermediate-card">
-                        <div class="card-body p-5 text-center">
-                            <!-- Logo -->
-                            <div class="mb-4">
-                                <i class="fas fa-link fa-3x text-primary mb-3"></i>
-                                <h2 class="text-primary">ShortLink Pro</h2>
-                            </div>
-                            
-                            <!-- Page Indicator -->
-                            <div class="page-indicator">
-                                {% for i in range(1, total_pages + 1) %}
-                                <div class="page-dot {% if i < page %}completed{% elif i == page %}active{% endif %}"></div>
-                                {% endfor %}
-                            </div>
-                            
-                            <h3 class="mb-4">Step {{ page }} of {{ total_pages }}</h3>
-                            <p class="lead mb-4">Please wait while we prepare your content...</p>
-                            
-                            <!-- Timer Display with integrated ads -->
-                            <div class="progress-circle mb-4">
-                                <div class="timer-display" id="timer">15</div>
-                            </div>
-                            
-                            <!-- Progress Bar -->
-                            <div class="progress mb-4" style="height: 10px;">
-                                <div class="progress-bar progress-bar-striped progress-bar-animated" 
-                                     id="progressBar" role="progressbar" style="width: 0%"></div>
-                            </div>
-                            
-                            <!-- Countdown Container -->
-                            <div class="countdown-container mb-4" style="background: linear-gradient(135deg, #667eea, #764ba2); border-radius: 15px; padding: 20px; color: white;">
-                                <div class="text-center mb-3">
-                                    <i class="fas fa-clock fa-2x mb-2"></i>
-                                    <h6>Please Wait - Verifying Link</h6>
-                                </div>
-                            </div>
-                            
-                            <!-- Continue Button with Optimized Revenue Strategy -->
-                            <button id="continueBtn" class="btn btn-primary btn-lg continue-btn" disabled>
-                                <i class="fas fa-arrow-right"></i> Continue to Link
-                            </button>
-                            
-                            <!-- DirectLink Option for Premium Users -->
-                            <div class="mt-3">
-                                <button id="directLinkBtn" class="btn btn-outline-light btn-sm" style="display: none;" 
-                                        onclick="if(typeof window.forceDirectLink !== 'undefined') window.forceDirectLink();">
-                                    <i class="fas fa-external-link-alt"></i> Direct Access (Premium)
-                                </button>
-                            </div>
-                            
-                            <div class="mt-4">
-                                <small class="text-muted">
-                                    <i class="fas fa-shield-alt"></i> Secure Link Verification in Progress
-                                </small>
-                            </div>
-                        </div>
-                    </div>
-                    
+<!-- Scroll Prompt -->
+<div id="scroll-prompt">
+    <i class="fas fa-arrow-down"></i> Please scroll down to the bottom to continue.
+</div>
 
-                    
+<div class="intermediate-container">
+    <div class="container-fluid">
+        <!-- Top Banner Ad (Desktop) -->
+        <div class="ad-container ad-desktop text-center mb-3">
+            <script type="text/javascript">
+                atOptions = {
+                    'key' : '3c47c0bda68f1da52fd5e6ca14ff2f47',
+                    'format' : 'iframe',
+                    'height' : 90,
+                    'width' : 728,
+                    'params' : {}
+                };
+            </script>
+            <script type="text/javascript" src="//violationtones.com/3c47c0bda68f1da52fd5e6ca14ff2f47/invoke.js"></script>
+        </div>
 
-                    
+        <!-- Additional Desktop Header Ad -->
+        <div class="ad-container ad-desktop text-center mb-3">
+            <script type="text/javascript">
+                atOptions = {
+                    'key' : 'c77addd8807ae1501482c5f5aac695f6',
+                    'format' : 'iframe',
+                    'height' : 250,
+                    'width' : 300,
+                    'params' : {}
+                };
+            </script>
+            <script type="text/javascript" src="//violationtones.com/c77addd8807ae1501482c5f5aac695f6/invoke.js"></script>
+        </div>
 
-                    
-                    <!-- Engagement message -->
-                    <div class="mt-4">
-                        <div class="engagement-message" style="min-height: 100px; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #667eea, #764ba2); border-radius: 15px; text-align: center; color: white;">
-                            <div>
-                                <i class="fas fa-shield-check fa-2x mb-2"></i>
-                                <h6>Secure Link Verification - Step {{ page }} of {{ total_pages }}</h6>
-                                <small>Your link is being verified for safety and security.</small>
-                            </div>
-                        </div>
-                    </div>
-                    
+        <!-- High Revenue Desktop Leaderboard -->
+        <div class="ad-container ad-desktop text-center mb-3">
+            <script type="text/javascript">
+                atOptions = {
+                    'key' : '3c47c0bda68f1da52fd5e6ca14ff2f47',
+                    'format' : 'iframe',
+                    'height' : 90,
+                    'width' : 728,
+                    'params' : {}
+                };
+            </script>
+            <script type="text/javascript" src="//violationtones.com/3c47c0bda68f1da52fd5e6ca14ff2f47/invoke.js"></script>
+        </div>
 
+        <!-- Premium Desktop Banner -->
+        <div class="ad-container ad-desktop text-center mb-3">
+            <script type="text/javascript">
+                atOptions = {
+                    'key' : 'c47ccb66c1a48fe021c9f216fc18b306',
+                    'format' : 'iframe',
+                    'height' : 60,
+                    'width' : 468,
+                    'params' : {}
+                };
+            </script>
+            <script type="text/javascript" src="//violationtones.com/c47ccb66c1a48fe021c9f216fc18b306/invoke.js"></script>
+        </div>
+
+        <!-- Top Mobile Ad -->
+        <div class="ad-container ad-mobile text-center mb-3">
+            <script type="text/javascript">
+                atOptions = {
+                    'key' : 'b5246cd3c56fd524c3b1d829a8c1c7cf',
+                    'format' : 'iframe',
+                    'height' : 50,
+                    'width' : 320,
+                    'params' : {}
+                };
+            </script>
+            <script type="text/javascript" src="//violationtones.com/b5246cd3c56fd524c3b1d829a8c1c7cf/invoke.js"></script>
+        </div>
+
+        <!-- High Revenue Mobile Banner 1 -->
+        <div class="ad-container ad-mobile text-center mb-3">
+            <script type="text/javascript">
+                atOptions = {
+                    'key' : 'c77addd8807ae1501482c5f5aac695f6',
+                    'format' : 'iframe',
+                    'height' : 250,
+                    'width' : 300,
+                    'params' : {}
+                };
+            </script>
+            <script type="text/javascript" src="//violationtones.com/c77addd8807ae1501482c5f5aac695f6/invoke.js"></script>
+        </div>
+
+        <!-- High Revenue Mobile Banner 2 -->
+        <div class="ad-container ad-mobile text-center mb-3">
+            <script async="async" data-cfasync="false" src="//violationtones.com/b9eaba6088ddcc69a2771c2c98bf19bb/invoke.js"></script>
+            <div id="container-mobile-top-b9eaba6088ddcc69a2771c2c98bf19bb"></div>
+        </div>
+
+        <!-- Sticky Mobile Ad for Revenue Optimization -->
+        <div class="mobile-sticky-ad ad-mobile">
+            <script type="text/javascript">
+                atOptions = {
+                    'key' : 'b5246cd3c56fd524c3b1d829a8c1c7cf',
+                    'format' : 'iframe',
+                    'height' : 50,
+                    'width' : 320,
+                    'params' : {}
+                };
+            </script>
+            <script type="text/javascript" src="//violationtones.com/b5246cd3c56fd524c3b1d829a8c1c7cf/invoke.js"></script>
+        </div>
+
+        <div class="row">
+            <!-- Left Sidebar Ad (Desktop) -->
+            <div class="col-lg-2 ad-sidebar ad-desktop">
+                <!-- Top Left Ad -->
+                <div class="mb-4">
+                    <script type="text/javascript">
+                        atOptions = {
+                            'key' : 'a87776b119f2afd92879d3cb352930c0',
+                            'format' : 'iframe',
+                            'height' : 600,
+                            'width' : 160,
+                            'params' : {}
+                        };
+                    </script>
+                    <script type="text/javascript" src="//violationtones.com/a87776b119f2afd92879d3cb352930c0/invoke.js"></script>
                 </div>
 
+                <!-- Bottom Left Ad -->
+                <div class="mb-4">
+                    <script type="text/javascript">
+                        atOptions = {
+                            'key' : 'c0a2b466bf403a6e43ca074047a6286a',
+                            'format' : 'iframe',
+                            'height' : 300,
+                            'width' : 160,
+                            'params' : {}
+                        };
+                    </script>
+                    <script type="text/javascript" src="//violationtones.com/c0a2b466bf403a6e43ca074047a6286a/invoke.js"></script>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="col-lg-8">
+                <div class="intermediate-card text-center">
+                    <!-- Logo -->
+                    <div class="mb-4">
+                        <img src="/static/images/Logo.png" alt="Logo" style="height: 60px; margin-bottom: 15px;">
+                    </div>
+                    
+                    <!-- Page Indicator -->
+                    <div class="page-indicator">
+                        {% for i in range(1, total_pages + 1) %}
+                        <div class="page-dot {% if i < page %}completed{% elif i == page %}active{% endif %}"></div>
+                        {% endfor %}
+                    </div>
+                    
+                    <h3 class="mb-3">Step {{ page }} of {{ total_pages }}</h3>
+                    <p class="lead mb-4">Your link is almost ready!</p>
+                    
+                    <!-- Timer -->
+                    <div class="progress-circle">
+                        <div class="timer-display d-flex align-items-center justify-content-center h-100" id="timer">15</div>
+                    </div>
+                    
+                    <!-- Progress Bar -->
+                    <div class="progress mb-4" style="height: 8px;">
+                        <div class="progress-bar progress-bar-striped progress-bar-animated" id="progressBar" role="progressbar" style="width: 0%"></div>
+                    </div>
+
+                    <!-- Center Ad (All Devices) -->
+                    <div class="ad-container my-4">
+                        <script type="text/javascript">
+                            atOptions = {
+                                'key' : 'c77addd8807ae1501482c5f5aac695f6',
+                                'format' : 'iframe',
+                                'height' : 250,
+                                'width' : 300,
+                                'params' : {}
+                            };
+                        </script>
+                        <script type="text/javascript" src="//violationtones.com/c77addd8807ae1501482c5f5aac695f6/invoke.js"></script>
+                    </div>
+
+                    <!-- Mobile-specific Ad 1 -->
+                    <div class="ad-container ad-mobile my-4">
+                        <script type="text/javascript">
+                            atOptions = {
+                                'key' : 'b5246cd3c56fd524c3b1d829a8c1c7cf',
+                                'format' : 'iframe',
+                                'height' : 50,
+                                'width' : 320,
+                                'params' : {}
+                            };
+                        </script>
+                        <script type="text/javascript" src="//violationtones.com/b5246cd3c56fd524c3b1d829a8c1c7cf/invoke.js"></script>
+                    </div>
+
+                    <!-- Mobile-specific Ad 2 -->
+                    <div class="ad-container ad-mobile my-4">
+                        <script type="text/javascript">
+                            atOptions = {
+                                'key' : 'c77addd8807ae1501482c5f5aac695f6',
+                                'format' : 'iframe',
+                                'height' : 250,
+                                'width' : 300,
+                                'params' : {}
+                            };
+                        </script>
+                        <script type="text/javascript" src="//violationtones.com/c77addd8807ae1501482c5f5aac695f6/invoke.js"></script>
+                    </div>
+
+                    <!-- Native Banner -->
+                    <div class="ad-container my-4">
+                        <script async="async" data-cfasync="false" src="//violationtones.com/b9eaba6088ddcc69a2771c2c98bf19bb/invoke.js"></script>
+                        <div id="container-b9eaba6088ddcc69a2771c2c98bf19bb"></div>
+                    </div>
+
+                    <!-- High Revenue Content Ad 1 -->
+                    <div class="ad-container my-4">
+                        <script type="text/javascript">
+                            atOptions = {
+                                'key' : 'c47ccb66c1a48fe021c9f216fc18b306',
+                                'format' : 'iframe',
+                                'height' : 60,
+                                'width' : 468,
+                                'params' : {}
+                            };
+                        </script>
+                        <script type="text/javascript" src="//violationtones.com/c47ccb66c1a48fe021c9f216fc18b306/invoke.js"></script>
+                    </div>
+
+                    <!-- High Revenue Content Ad 2 -->
+                    <div class="ad-container my-4">
+                        <script type="text/javascript">
+                            atOptions = {
+                                'key' : '3c47c0bda68f1da52fd5e6ca14ff2f47',
+                                'format' : 'iframe',
+                                'height' : 90,
+                                'width' : 728,
+                                'params' : {}
+                            };
+                        </script>
+                        <script type="text/javascript" src="//violationtones.com/3c47c0bda68f1da52fd5e6ca14ff2f47/invoke.js"></script>
+                    </div>
+
+                    <!-- Additional Desktop Content Ad -->
+                    <div class="ad-container ad-desktop my-4">
+                        <script type="text/javascript">
+                            atOptions = {
+                                'key' : 'c47ccb66c1a48fe021c9f216fc18b306',
+                                'format' : 'iframe',
+                                'height' : 60,
+                                'width' : 468,
+                                'params' : {}
+                            };
+                        </script>
+                        <script type="text/javascript" src="//violationtones.com/c47ccb66c1a48fe021c9f216fc18b306/invoke.js"></script>
+                    </div>
+
+                    <!-- Mobile-specific Ad 3 -->
+                    <div class="ad-container ad-mobile my-4">
+                        <script type="text/javascript">
+                            atOptions = {
+                                'key' : 'b5246cd3c56fd524c3b1d829a8c1c7cf',
+                                'format' : 'iframe',
+                                'height' : 50,
+                                'width' : 320,
+                                'params' : {}
+                            };
+                        </script>
+                        <script type="text/javascript" src="//violationtones.com/b5246cd3c56fd524c3b1d829a8c1c7cf/invoke.js"></script>
+                    </div>
+
+                    <div class="mt-4">
+                        <small class="text-muted">
+                            <i class="fas fa-shield-alt"></i> Secure Link Verification in Progress
+                        </small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Sidebar Ad (Desktop) -->
+            <div class="col-lg-2 ad-sidebar ad-desktop">
+                <!-- Top Right Ad -->
+                <div class="mb-4">
+                    <script type="text/javascript">
+                        atOptions = {
+                            'key' : 'c0a2b466bf403a6e43ca074047a6286a',
+                            'format' : 'iframe',
+                            'height' : 300,
+                            'width' : 160,
+                            'params' : {}
+                        };
+                    </script>
+                    <script type="text/javascript" src="//violationtones.com/c0a2b466bf403a6e43ca074047a6286a/invoke.js"></script>
+                </div>
+
+                <!-- Middle Right Ad -->
+                <div class="mb-4">
+                    <script type="text/javascript">
+                        atOptions = {
+                            'key' : 'a87776b119f2afd92879d3cb352930c0',
+                            'format' : 'iframe',
+                            'height' : 600,
+                            'width' : 160,
+                            'params' : {}
+                        };
+                    </script>
+                    <script type="text/javascript" src="//violationtones.com/a87776b119f2afd92879d3cb352930c0/invoke.js"></script>
+                </div>
+
+                <!-- Bottom Right Ad -->
+                <div class="mb-4">
+                    <script type="text/javascript">
+                        atOptions = {
+                            'key' : 'c77addd8807ae1501482c5f5aac695f6',
+                            'format' : 'iframe',
+                            'height' : 250,
+                            'width' : 300,
+                            'params' : {}
+                        };
+                    </script>
+                    <script type="text/javascript" src="//violationtones.com/c77addd8807ae1501482c5f5aac695f6/invoke.js"></script>
+                </div>
             </div>
         </div>
+
+        <!-- Bottom Ads (Responsive) -->
+        <div class="ad-container mt-4">
+            <!-- Desktop Ad -->
+            <div class="ad-desktop">
+                <script type="text/javascript">
+                    atOptions = {
+                        'key' : 'c47ccb66c1a48fe021c9f216fc18b306',
+                        'format' : 'iframe',
+                        'height' : 60,
+                        'width' : 468,
+                        'params' : {}
+                    };
+                </script>
+                <script type="text/javascript" src="//violationtones.com/c47ccb66c1a48fe021c9f216fc18b306/invoke.js"></script>
+            </div>
+            <!-- Mobile Ad -->
+            <div class="ad-mobile">
+                <script type="text/javascript">
+                    atOptions = {
+                        'key' : 'b5246cd3c56fd524c3b1d829a8c1c7cf',
+                        'format' : 'iframe',
+                        'height' : 50,
+                        'width' : 320,
+                        'params' : {}
+                    };
+                </script>
+                <script type="text/javascript" src="//violationtones.com/b5246cd3c56fd524c3b1d829a8c1c7cf/invoke.js"></script>
+            </div>
+        </div>
+
+        <!-- Additional Mobile Bottom Ads -->
+        <div class="ad-container ad-mobile mt-4">
+            <script type="text/javascript">
+                atOptions = {
+                    'key' : 'c77addd8807ae1501482c5f5aac695f6',
+                    'format' : 'iframe',
+                    'height' : 250,
+                    'width' : 300,
+                    'params' : {}
+                };
+            </script>
+            <script type="text/javascript" src="//violationtones.com/c77addd8807ae1501482c5f5aac695f6/invoke.js"></script>
+        </div>
+
+        <!-- Mobile Native Banner -->
+        <div class="ad-container ad-mobile mt-4">
+            <script async="async" data-cfasync="false" src="//violationtones.com/b9eaba6088ddcc69a2771c2c98bf19bb/invoke.js"></script>
+            <div id="container-mobile-b9eaba6088ddcc69a2771c2c98bf19bb"></div>
+        </div>
+
+        <!-- Social Bar Ad (Fallback) -->
+        <div class="ad-container text-center my-3">
+            <script type='text/javascript' src='//violationtones.com/43/8f/a5/438fa524d4342a132b9a0bc734e61d56.js'></script>
+        </div>
+
+        <!-- Pre-Continue High Revenue Ads -->
+        <div class="ad-container text-center my-4">
+            <script type="text/javascript">
+                atOptions = {
+                    'key' : 'c77addd8807ae1501482c5f5aac695f6',
+                    'format' : 'iframe',
+                    'height' : 250,
+                    'width' : 300,
+                    'params' : {}
+                };
+            </script>
+            <script type="text/javascript" src="//violationtones.com/c77addd8807ae1501482c5f5aac695f6/invoke.js"></script>
+        </div>
+
+        <!-- Additional Native Ad Before Continue -->
+        <div class="ad-container text-center my-4">
+            <script async="async" data-cfasync="false" src="//violationtones.com/b9eaba6088ddcc69a2771c2c98bf19bb/invoke.js"></script>
+            <div id="container-pre-continue-b9eaba6088ddcc69a2771c2c98bf19bb"></div>
+        </div>
+
+        <!-- Mobile-specific Pre-Continue Ad -->
+        <div class="ad-container ad-mobile text-center my-4">
+            <script type="text/javascript">
+                atOptions = {
+                    'key' : 'b5246cd3c56fd524c3b1d829a8c1c7cf',
+                    'format' : 'iframe',
+                    'height' : 50,
+                    'width' : 320,
+                    'params' : {}
+                };
+            </script>
+            <script type="text/javascript" src="//violationtones.com/b5246cd3c56fd524c3b1d829a8c1c7cf/invoke.js"></script>
+        </div>
+
+        <!-- Continue Button -->
+        <div class="text-center mt-4">
+            <button id="continueBtn" class="btn btn-primary btn-lg continue-btn" disabled>
+                <i class="fas fa-hourglass-half"></i> Please Wait...
+            </button>
+        </div>
     </div>
+</div>
 {% endblock %}
 
 {% block extra_scripts %}
@@ -172,7 +570,10 @@
         window.pageData = {
             page: {{ page }},
             totalPages: {{ total_pages }},
-            shortCode: "{{ short_code }}"
+            shortCode: "{{ short_code }}",
+            directLink: "https://violationtones.com/vwh3k6pwkv?key=53274b8825d29e20912b29cf21df8bc9",
+            requiredClicks: 2 // Change this number to control how many clicks are required (1-5 recommended)
         };
     </script>
+
 {% endblock %}

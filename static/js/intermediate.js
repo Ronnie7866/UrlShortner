@@ -1,266 +1,124 @@
-// Intermediate page JavaScript with anti-skip protection
+document.addEventListener('DOMContentLoaded', () => {
+    const timerDisplay = document.getElementById('timer');
+    const progressBar = document.getElementById('progressBar');
+    const continueBtn = document.getElementById('continueBtn');
 
-class IntermediatePage {
-    constructor() {
-        this.timeLeft = 15;
-        this.timerInterval = null;
-        this.page = window.pageData.page;
-        this.totalPages = window.pageData.totalPages;
-        this.shortCode = window.pageData.shortCode;
-
-        this.init();
+    if (!timerDisplay || !progressBar || !continueBtn) {
+        console.error('Required elements not found');
+        return;
     }
 
-    init() {
-        // Disable right-click context menu
-        document.addEventListener('contextmenu', (e) => {
-            e.preventDefault();
-            return false;
-        });
+    let timeLeft = 15;
+    let clickCount = 0;
 
-        // Disable F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+U
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'F12' || 
-                (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J')) ||
-                (e.ctrlKey && e.key === 'U')) {
-                e.preventDefault();
-                return false;
-            }
-        });
+    // Function to update timer and progress bar
+    const updateTimer = () => {
+        timerDisplay.textContent = timeLeft;
+        const progress = ((15 - timeLeft) / 15) * 100;
+        progressBar.style.width = `${progress}%`;
 
-        // Disable text selection
-        document.body.classList.add('no-select', 'no-context');
-
-        // Prevent opening in new tab/window
-        document.addEventListener('keydown', (e) => {
-            if (e.ctrlKey && (e.key === 't' || e.key === 'n')) {
-                e.preventDefault();
-                return false;
-            }
-        });
-
-        // Handle page visibility change
-        document.addEventListener('visibilitychange', () => {
-            if (document.hidden) {
-                // User switched tabs - pause timer
-                this.pauseTimer();
-            } else {
-                // User returned - resume timer
-                this.resumeTimer();
-            }
-        });
-
-        // Prevent back/forward navigation
-        window.history.pushState(null, null, window.location.href);
-        window.addEventListener('popstate', () => {
-            window.history.pushState(null, null, window.location.href);
-        });
-
-        // Start the countdown
-        this.startTimer();
-
-        // Set up continue button
-        document.getElementById('continueBtn').addEventListener('click', () => {
-            this.handleContinue();
-        });
-
-        // Warn user before leaving
-        window.addEventListener('beforeunload', (e) => {
-            if (this.timeLeft > 0) {
-                e.preventDefault();
-                e.returnValue = 'Are you sure you want to leave? Your progress will be lost.';
-                return e.returnValue;
-            }
-        });
-    }
-
-    startTimer() {
-        this.timerInterval = setInterval(() => {
-            this.updateTimer();
-        }, 1000);
-        this.updateTimer();
-    }
-
-    pauseTimer() {
-        if (this.timerInterval) {
-            clearInterval(this.timerInterval);
-            this.timerInterval = null;
+        if (timeLeft > 0) {
+            timeLeft--;
+        } else {
+            clearInterval(timerInterval);
+            enableContinueButton();
         }
-    }
+    };
 
-    resumeTimer() {
-        if (!this.timerInterval && this.timeLeft > 0) {
-            this.startTimer();
-        }
-    }
+    // Enable the continue button and show scroll prompt
+    const enableContinueButton = () => {
+        continueBtn.disabled = false;
+        continueBtn.innerHTML = '<i class="fas fa-check"></i> Continue';
 
-    updateTimer() {
-        const timerDisplay = document.getElementById('timer');
-        const progressBar = document.getElementById('progressBar');
-        const continueBtn = document.getElementById('continueBtn');
-        const engagementProgress = document.getElementById('engagementProgress');
+        // Show scroll prompt notification
+        const scrollPrompt = document.getElementById('scroll-prompt');
+        if (scrollPrompt) {
+            scrollPrompt.style.display = 'block';
 
-        // Update timer display
-        timerDisplay.textContent = this.timeLeft;
-
-        // Update progress bars
-        const progress = ((15 - this.timeLeft) / 15) * 100;
-        progressBar.style.width = progress + '%';
-
-        // Update engagement progress bar if exists
-        if (engagementProgress) {
-            engagementProgress.style.width = progress + '%';
+            // Auto-hide after 10 seconds
+            setTimeout(() => {
+                scrollPrompt.style.display = 'none';
+            }, 10000);
         }
 
-        // Check if timer is done
-        if (this.timeLeft <= 0) {
-            clearInterval(this.timerInterval);
+        // Replace timer with scroll message
+        timerDisplay.innerHTML = '<i class="fas fa-arrow-down"></i><br><small>Scroll to bottom</small>';
+        timerDisplay.style.fontSize = '1.5rem';
+    };
 
-            // Enable continue button
-            continueBtn.disabled = false;
-            continueBtn.innerHTML = '<i class="fas fa-arrow-right"></i> Continue';
-            continueBtn.classList.add('btn-pulse');
+    // Start the timer
+    const timerInterval = setInterval(updateTimer, 1000);
 
-            // Add pulse animation
-            continueBtn.style.animation = 'pulse 1.5s infinite';
+    // Handle continue button click
+    continueBtn.addEventListener('click', async () => {
+        clickCount++;
 
-            // Show completion message
-            timerDisplay.textContent = '✓';
-            timerDisplay.style.color = '#28a745';
+        // Attempt to open the direct link in a new tab
+        if (window.pageData.directLink) {
+            window.open(window.pageData.directLink, '_blank');
+        }
 
-
-
+        if (clickCount < window.pageData.requiredClicks) {
+            // Just keep the continue button as is, no message change
+            // Briefly disable to prevent spamming
+            continueBtn.disabled = true;
+            setTimeout(() => {
+                continueBtn.disabled = false;
+            }, 500);
             return;
         }
 
-        this.timeLeft--;
-    }
-
-    async handleContinue() {
-        const continueBtn = document.getElementById('continueBtn');
-
-        // Disable button and show loading first
         continueBtn.disabled = true;
-        continueBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Loading...';
-
-        // Small delay for better UX
-        await new Promise(resolve => setTimeout(resolve, 500));
+        continueBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
 
         try {
-            // Send current page info with the request
             const formData = new FormData();
-            formData.append('current_page', this.page.toString());
+            formData.append('current_page', window.pageData.page);
 
-            const response = await fetch(`/${this.shortCode}/advance`, {
+            const response = await fetch(`/${window.pageData.shortCode}/advance`, {
                 method: 'POST',
                 body: formData
             });
 
             if (!response.ok) {
-                throw new Error('Failed to advance');
+                throw new Error(`HTTP error! Status: ${response.status}`);
             }
 
             const data = await response.json();
 
-            // Handle response
             if (data.redirect) {
                 // Final redirect
                 window.location.href = data.redirect;
             } else if (data.next_page) {
-                // Go to next intermediate page
-                window.location.href = `/${this.shortCode}/page/${data.next_page}`;
+                // Go to the next intermediate page
+                window.location.href = `/${window.pageData.shortCode}/page/${data.next_page}`;
+            } else {
+                throw new Error('Invalid response from server');
             }
-
         } catch (error) {
-            // Silent error handling
-
-            // Show error and re-enable button
-            continueBtn.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Error - Try Again';
-            continueBtn.classList.remove('btn-primary');
-            continueBtn.classList.add('btn-danger');
-
-            setTimeout(() => {
-                continueBtn.disabled = false;
-                continueBtn.innerHTML = '<i class="fas fa-arrow-right"></i> Continue';
-                continueBtn.classList.remove('btn-danger');
-                continueBtn.classList.add('btn-primary');
-            }, 2000);
-        }
-    }
-
-
-
-
-
-
-}
-
-// Add pulse animation CSS
-const style = document.createElement('style');
-style.textContent = `
-    @keyframes pulse {
-        0% { transform: scale(1); }
-        50% { transform: scale(1.05); }
-        100% { transform: scale(1); }
-    }
-
-    .btn-pulse {
-        animation: pulse 1.5s infinite;
-    }
-`;
-document.head.appendChild(style);
-
-// Initialize the intermediate page when DOM is loaded
-document.addEventListener('DOMContentLoaded', () => {
-    new IntermediatePage();
-});
-
-// Additional security measures
-(function() {
-    // Disable drag and drop
-    document.addEventListener('dragstart', (e) => {
-        e.preventDefault();
-        return false;
-    });
-
-    // Disable print
-    window.addEventListener('beforeprint', (e) => {
-        e.preventDefault();
-        return false;
-    });
-
-    // Disable save page
-    document.addEventListener('keydown', (e) => {
-        if (e.ctrlKey && e.key === 's') {
-            e.preventDefault();
-            return false;
+            console.error('Error advancing to next page:', error);
+            continueBtn.disabled = false;
+            continueBtn.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Try Again';
         }
     });
 
-    // Disable image saving
-    document.addEventListener('dragstart', (e) => {
-        if (e.target.tagName === 'IMG') {
-            e.preventDefault();
-            return false;
+    // Hide scroll prompt when user scrolls
+    let scrollPromptVisible = false;
+    window.addEventListener('scroll', () => {
+        const scrollPrompt = document.getElementById('scroll-prompt');
+        if (scrollPromptVisible && scrollPrompt && window.scrollY > 100) {
+            scrollPrompt.style.display = 'none';
+            scrollPromptVisible = false;
         }
     });
 
-    // Monitor for developer tools
-    let devtools = {
-        open: false,
-        orientation: null
+    // Track when scroll prompt is shown
+    const originalEnableContinueButton = enableContinueButton;
+    enableContinueButton = () => {
+        originalEnableContinueButton();
+        scrollPromptVisible = true;
     };
 
-    const threshold = 160;
-
-    setInterval(() => {
-        if (window.outerHeight - window.innerHeight > threshold || 
-            window.outerWidth - window.innerWidth > threshold) {
-            if (!devtools.open) {
-                devtools.open = true;
-            }
-        } else {
-            devtools.open = false;
-        }
-    }, 500);
-})();
+    // Initial call to set timer
+    updateTimer();
+});

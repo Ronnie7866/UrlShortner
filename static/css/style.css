@@ -227,32 +227,73 @@ footer {
     backdrop-filter: blur(10px);
 }
 
-/* Responsive adjustments */
-@media (max-width: 768px) {
-    /* Full width on mobile */
+/* Enhanced Mobile-First Responsive Design */
+@media (max-width: 767px) {
+    /* Full width on mobile with better padding */
     .container-fluid {
-        padding: 0 15px;
+        padding: 0 10px;
     }
 
-    /* Reduce padding on mobile */
+    /* Optimize main content for mobile */
     .intermediate-card .card-body {
-        padding: 2rem 1rem;
+        padding: 1.5rem 1rem;
     }
 
-    /* Make timer smaller on mobile */
+    /* Better mobile timer */
     .timer-display {
-        font-size: 2.5rem;
+        font-size: 2rem;
+        font-weight: 600;
     }
 
     .progress-circle {
-        width: 120px;
-        height: 120px;
+        width: 100px;
+        height: 100px;
+        margin-bottom: 15px;
     }
 
-    /* Optimize countdown container for mobile */
+    /* Mobile countdown optimizations */
     .countdown-container {
-        padding: 15px;
-        margin: 15px 0;
+        padding: 15px 10px;
+        margin: 15px 5px;
+        border-radius: 15px;
+    }
+
+    /* Better mobile navigation */
+    .navbar-brand {
+        font-size: 1.1rem;
+    }
+
+    .navbar-brand img {
+        height: 25px !important;
+    }
+
+    /* Mobile content spacing */
+    .intermediate-container {
+        padding-top: 15px;
+        padding-bottom: 15px;
+    }
+
+    /* Ensure main content area has proper width */
+    .col-lg-8 {
+        width: 100%;
+        max-width: 100%;
+        padding: 0 10px;
+    }
+
+    /* Improve mobile readability */
+    h3 {
+        font-size: 1.4rem;
+    }
+
+    .lead {
+        font-size: 1rem;
+        margin-bottom: 1.5rem !important;
+    }
+
+    /* Mobile progress bar */
+    .progress {
+        height: 6px !important;
+        margin-bottom: 1.5rem !important;
     }
 }
 
@@ -261,5 +302,184 @@ footer {
     /* Adjust main content */
     .intermediate-container .container-fluid {
         max-width: 1200px;
+    }
+}
+
+/* Ad container styling - Clean, no visible containers */
+.ad-container {
+    padding: 10px 0;
+    text-align: center;
+    background: transparent;
+    border: none;
+    margin-bottom: 15px;
+    overflow: visible;
+    width: 100%;
+    max-width: 100%;
+}
+
+.ad-sidebar {
+    padding: 10px 5px;
+    text-align: center;
+}
+
+/* Responsive ad visibility */
+.ad-desktop { display: none; }
+@media (min-width: 992px) {
+    .ad-desktop { display: block; }
+}
+
+.ad-mobile {
+    display: block;
+    margin: 20px auto;
+    max-width: 100%;
+}
+@media (min-width: 768px) {
+    .ad-mobile { display: none; }
+}
+
+/* Mobile-specific ad improvements */
+@media (max-width: 767px) {
+    .ad-container {
+        margin: 20px 0;
+        padding: 15px 5px;
+        width: 100%;
+        max-width: 100%;
+        overflow: visible;
+    }
+
+    /* Ensure mobile ads are properly centered and visible */
+    .ad-mobile {
+        display: block !important;
+        text-align: center;
+        margin: 25px auto;
+        padding: 10px 0;
+        width: 100%;
+        max-width: 100%;
+    }
+
+    /* Add more spacing between ads on mobile */
+    .ad-container + .ad-container {
+        margin-top: 30px;
+    }
+
+    /* Make sure ads don't overflow on small screens */
+    .ad-container iframe {
+        max-width: 100% !important;
+        width: 100% !important;
+        height: auto;
+        display: block;
+        margin: 0 auto;
+    }
+
+    /* Ensure ad scripts have proper container */
+    .ad-container > div {
+        width: 100%;
+        max-width: 100%;
+        overflow: visible;
+    }
+
+    /* Mobile ad revenue optimization */
+    .ad-mobile {
+        min-height: 60px; /* Ensure space for ads to load */
+        background: transparent;
+    }
+
+    /* Sticky mobile ads for better visibility */
+    .mobile-sticky-ad {
+        position: sticky;
+        top: 70px;
+        z-index: 100;
+        background: rgba(255,255,255,0.95);
+        padding: 10px;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        margin: 20px 0;
+    }
+}
+
+/* Desktop ad revenue optimization */
+@media (min-width: 992px) {
+    .ad-sidebar {
+        position: sticky;
+        top: 80px;
+        max-height: calc(100vh - 100px);
+        overflow-y: auto;
+    }
+
+    /* Desktop ad spacing */
+    .ad-desktop {
+        margin: 15px 0;
+    }
+
+    /* Ensure desktop ads are prominent */
+    .ad-container.ad-desktop {
+        background: rgba(248,249,250,0.5);
+        border: 1px solid rgba(0,0,0,0.05);
+        border-radius: 8px;
+        padding: 15px;
+    }
+}
+
+/* Scroll down prompt - Enhanced for better visibility */
+#scroll-prompt {
+    display: none; /* Hidden by default */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: linear-gradient(45deg, #ff6b6b, #ffa500);
+    color: white;
+    text-align: center;
+    padding: 18px 15px;
+    z-index: 1051; /* Above navbar */
+    font-size: 1.2rem;
+    font-weight: bold;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    animation: slideDown 0.5s ease-in-out, pulse 2s infinite;
+    border-bottom: 3px solid rgba(255,255,255,0.3);
+}
+
+#scroll-prompt i {
+    margin-right: 10px;
+    animation: bounce 1s infinite;
+}
+
+@keyframes slideDown {
+    from {
+        top: -100px;
+        opacity: 0;
+    }
+    to {
+        top: 0;
+        opacity: 1;
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        background: linear-gradient(45deg, #ff6b6b, #ffa500);
+    }
+    50% {
+        background: linear-gradient(45deg, #ffa500, #ff6b6b);
+    }
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-5px);
+    }
+    60% {
+        transform: translateY(-3px);
+    }
+}
+
+/* Mobile scroll prompt adjustments */
+@media (max-width: 767px) {
+    #scroll-prompt {
+        font-size: 1rem;
+        padding: 15px 10px;
     }
 }

@@ -282,21 +282,7 @@ async def intermediate_page(short_code: str, page_num: int, request: Request, db
     if not short_url:
         raise HTTPException(status_code=404, detail="Short URL not found")
     
-    # If this is page 5, redirect to final URL
-    if page_num > 4:
-        # Record the click
-        from datetime import date
-        click = Click(
-            short_url_id=short_url.id,
-            ip_address=request.client.host,
-            user_agent=request.headers.get("user-agent", ""),
-            click_date=date.today(),
-            completed_flow=True
-        )
-        db.add(click)
-        db.commit()
-        
-        return RedirectResponse(url=short_url.original_url)
+    # The logic to advance to the final URL is handled by the /advance endpoint
     
     return templates.TemplateResponse("intermediate.html", {
         "request": request,
@@ -312,17 +298,15 @@ async def advance_page(short_code: str, request: Request, db: Session = Depends(
     short_url = db.query(ShortURL).filter(ShortURL.short_code == short_code).first()
     if not short_url:
         raise HTTPException(status_code=404, detail="Short URL not found")
+
+    # Get current page from form data
+    form_data = await request.form()
+    current_page_str = form_data.get("current_page")
     
-    # Use a simpler session approach - store minimal data in URL/form
-    current_page = 1  # Default to page 1
-    
-    # Try to get page from form data if available
-    try:
-        form_data = await request.form()
-        current_page = int(form_data.get("current_page", 1))
-    except:
-        pass
-    
+    if not current_page_str or not current_page_str.isdigit():
+        raise HTTPException(status_code=400, detail="Invalid or missing current_page")
+        
+    current_page = int(current_page_str)
     next_page = current_page + 1
     
     if next_page > 4:

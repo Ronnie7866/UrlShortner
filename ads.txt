@@ -1,0 +1,92 @@
+here are the ads units:
+<script type="text/javascript">
+	atOptions = {
+		'key' : 'c77addd8807ae1501482c5f5aac695f6',
+		'format' : 'iframe',
+		'height' : 250,
+		'width' : 300,
+		'params' : {}
+	};
+</script>
+<script type="text/javascript" src="//violationtones.com/c77addd8807ae1501482c5f5aac695f6/invoke.js"></script>
+
+
+<script type="text/javascript">
+	atOptions = {
+		'key' : '3c47c0bda68f1da52fd5e6ca14ff2f47',
+		'format' : 'iframe',
+		'height' : 90,
+		'width' : 728,
+		'params' : {}
+	};
+</script>
+<script type="text/javascript" src="//violationtones.com/3c47c0bda68f1da52fd5e6ca14ff2f47/invoke.js"></script>
+
+
+<script type="text/javascript">
+	atOptions = {
+		'key' : 'a87776b119f2afd92879d3cb352930c0',
+		'format' : 'iframe',
+		'height' : 600,
+		'width' : 160,
+		'params' : {}
+	};
+</script>
+<script type="text/javascript" src="//violationtones.com/a87776b119f2afd92879d3cb352930c0/invoke.js"></script>
+
+
+<script type="text/javascript">
+	atOptions = {
+		'key' : 'c0a2b466bf403a6e43ca074047a6286a',
+		'format' : 'iframe',
+		'height' : 300,
+		'width' : 160,
+		'params' : {}
+	};
+</script>
+<script type="text/javascript" src="//violationtones.com/c0a2b466bf403a6e43ca074047a6286a/invoke.js"></script>
+
+
+
+<script type="text/javascript">
+	atOptions = {
+		'key' : 'c47ccb66c1a48fe021c9f216fc18b306',
+		'format' : 'iframe',
+		'height' : 60,
+		'width' : 468,
+		'params' : {}
+	};
+</script>
+<script type="text/javascript" src="//violationtones.com/c47ccb66c1a48fe021c9f216fc18b306/invoke.js"></script>
+
+
+Popunder:
+<script type='text/javascript' src='//violationtones.com/5f/14/06/5f14061e3eb1712029fc0b3ac8f3034f.js'></script>
+
+
+DirectLink:
+https://violationtones.com/vwh3k6pwkv?key=53274b8825d29e20912b29cf21df8bc9 
+
+
+
+SocialBar:
+<script type='text/javascript' src='//violationtones.com/43/8f/a5/438fa524d4342a132b9a0bc734e61d56.js'></script>
+
+
+
+<script type="text/javascript">
+	atOptions = {
+		'key' : 'b5246cd3c56fd524c3b1d829a8c1c7cf',
+		'format' : 'iframe',
+		'height' : 50,
+		'width' : 320,
+		'params' : {}
+	};
+</script>
+<script type="text/javascript" src="//violationtones.com/b5246cd3c56fd524c3b1d829a8c1c7cf/invoke.js"></script>
+
+
+
+NativeBanner 4:1
+<script async="async" data-cfasync="false" src="//violationtones.com/b9eaba6088ddcc69a2771c2c98bf19bb/invoke.js"></script>
+<div id="container-b9eaba6088ddcc69a2771c2c98bf19bb"></div>
