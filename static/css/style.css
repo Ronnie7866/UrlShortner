@@ -167,15 +167,15 @@ footer {
     .container {
         padding: 0 15px;
     }
-    
+
     .card-body {
         padding: 1rem;
     }
-    
+
     .table-responsive {
         border-radius: 15px;
     }
-    
+
     .btn {
         font-size: 0.9rem;
         padding: 10px 20px;
@@ -229,14 +229,26 @@ footer {
 
 /* Enhanced Mobile-First Responsive Design */
 @media (max-width: 767px) {
-    /* Full width on mobile with better padding */
+    /* Full width on mobile with minimal padding to give ads more space */
     .container-fluid {
-        padding: 0 10px;
+        padding: 0 !important;
+        margin: 0 !important;
+        overflow-x: visible;
+        text-align: center !important;
+        /* Remove all container constraints */
     }
 
     /* Optimize main content for mobile */
     .intermediate-card .card-body {
         padding: 1.5rem 1rem;
+    }
+
+    /* Give mobile ads breathing room and force centering */
+    .intermediate-container {
+        padding: 10px 0;
+        overflow-x: visible;
+        text-align: center !important;
+        width: 100% !important;
     }
 
     /* Better mobile timer */
@@ -299,9 +311,11 @@ footer {
 
 /* Desktop optimizations */
 @media (min-width: 992px) {
-    /* Adjust main content */
+    /* Adjust main content: allow 300px sidebars + 600px center, no container padding */
     .intermediate-container .container-fluid {
-        max-width: 1200px;
+        max-width: 1260px; /* 300 + 600 + 300 + small buffer */
+        padding-left: 0;
+        padding-right: 0;
     }
 }
 
@@ -322,6 +336,15 @@ footer {
     text-align: center;
 }
 
+/* Ensure sidebar ad creatives render at full width without clipping */
+.ad-sidebar iframe,
+.ad-sidebar ins,
+.ad-sidebar > div {
+    width: 300px !important;
+    max-width: 100% !important;
+    display: inline-block;
+}
+
 /* Responsive ad visibility */
 .ad-desktop { display: none; }
 @media (min-width: 992px) {
@@ -340,48 +363,93 @@ footer {
 /* Mobile-specific ad improvements */
 @media (max-width: 767px) {
     .ad-container {
-        margin: 20px 0;
-        padding: 15px 5px;
-        width: 100%;
-        max-width: 100%;
-        overflow: visible;
+        margin: 15px auto !important;
+        padding: 10px !important;
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        overflow: visible !important;
+        text-align: center !important;
+        width: 100% !important;
+        /* Force centering on mobile */
     }
 
     /* Ensure mobile ads are properly centered and visible */
     .ad-mobile {
-        display: block !important;
-        text-align: center;
-        margin: 25px auto;
-        padding: 10px 0;
-        width: 100%;
-        max-width: 100%;
-    }
-
-    /* Add more spacing between ads on mobile */
-    .ad-container + .ad-container {
-        margin-top: 30px;
-    }
-
-    /* Make sure ads don't overflow on small screens */
-    .ad-container iframe {
-        max-width: 100% !important;
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        margin: 15px auto !important;
+        padding: 10px !important;
+        overflow: visible !important;
+        text-align: center !important;
         width: 100% !important;
-        height: auto;
-        display: block;
-        margin: 0 auto;
+        /* Force centering on mobile */
     }
 
-    /* Ensure ad scripts have proper container */
-    .ad-container > div {
-        width: 100%;
-        max-width: 100%;
-        overflow: visible;
+    /* Reduce spacing between ads on mobile */
+    .ad-container + .ad-container {
+        margin-top: 10px;
+    }
+
+    /* Let ad iframes maintain their natural dimensions */
+    .ad-container iframe,
+    .ad-mobile iframe {
+        display: block !important;
+        margin: 0 auto !important;
+        border: none !important;
+        /* Remove all width/height forcing - let ads be their natural size */
+        overflow: visible !important;
+    }
+
+    /* Allow ad script containers to size naturally and center properly */
+    .ad-container > div,
+    .ad-mobile > div {
+        display: block !important;
+        text-align: center !important;
+        overflow: visible !important;
+        margin: 0 auto !important;
+        /* Ensure ad content is centered */
     }
 
     /* Mobile ad revenue optimization */
     .ad-mobile {
-        min-height: 60px; /* Ensure space for ads to load */
         background: transparent;
+        overflow: visible;
+    }
+
+    /* Override any left-alignment that might be applied */
+    .ad-container,
+    .ad-mobile {
+        left: auto !important;
+        right: auto !important;
+        float: none !important;
+        position: relative !important;
+        transform: none !important;
+    }
+
+    /* Force center alignment on mobile for all ad content */
+    .ad-container img,
+    .ad-container iframe,
+    .ad-mobile img,
+    .ad-mobile iframe {
+        display: block !important;
+        margin: 0 auto !important;
+        text-align: center !important;
+    }
+
+    /* Specific targeting for mobile banner ads that appear in the screenshot */
+    .ad-mobile.mb-3,
+    .ad-container.ad-mobile {
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        width: 100vw !important;
+        margin-left: calc(-50vw + 50%) !important;
+        margin-right: calc(-50vw + 50%) !important;
+        padding: 15px 0 !important;
+        text-align: center !important;
+        /* Break out of container and center on full viewport width */
     }
 
     /* Sticky mobile ads for better visibility */
@@ -390,10 +458,62 @@ footer {
         top: 70px;
         z-index: 100;
         background: rgba(255,255,255,0.95);
-        padding: 10px;
+        padding: 5px;
         border-radius: 8px;
         box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        margin: 20px 0;
+        margin: 10px auto;
+        max-width: 100%;
+        overflow: visible;
+    }
+
+    /* Fix main content area on mobile */
+    .col-lg-8,
+    .col-lg-6 {
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 0 !important;
+        margin: 0;
+        overflow: visible;
+    }
+
+    /* Ensure intermediate card doesn't constrain ads */
+    .intermediate-card {
+        margin: 10px 5px;
+        padding: 1.5rem 1rem;
+        overflow: visible;
+        /* Remove width constraints */
+    }
+
+    /* Ensure native ad containers don't get cut off */
+    div[id*="container-"] {
+        max-width: 100% !important;
+        width: 100% !important;
+        margin: 0 auto !important;
+        overflow: visible !important;
+        min-height: auto !important;
+        height: auto !important;
+    }
+
+    /* Force all ad elements to center properly */
+    .ad-container,
+    .ad-container div,
+    .ad-container > div,
+    .ad-mobile,
+    .ad-mobile div,
+    .ad-mobile > div {
+        overflow: visible !important;
+        text-align: center !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        /* Force centering at every level */
+    }
+
+    /* Ensure all ad-related elements are centered and visible */
+    .ad-container *,
+    .ad-mobile * {
+        overflow: visible !important;
+        text-align: center !important;
+        /* Center all ad content */
     }
 }
 
@@ -418,6 +538,30 @@ footer {
         border-radius: 8px;
         padding: 15px;
     }
+}
+
+
+/* Simple responsive ad grid to utilize empty space */
+.ad-grid {
+    display: grid;
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+    gap: 16px;
+}
+@media (min-width: 768px) {
+    .ad-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+@media (min-width: 1200px) {
+    .ad-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* Ensure ad iframes don’t stretch oddly in grid */
+.ad-grid .ad-container iframe {
+    display: block;
+    margin: 0 auto;
 }
 
 /* Scroll down prompt - Enhanced for better visibility */

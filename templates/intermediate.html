@@ -3,40 +3,23 @@
 {% block title %}Please Wait - Page {{ page }} of {{ total_pages }}{% endblock %}
 
 {% block extra_head %}
-    <!-- Pop-under and Social Bar scripts with error handling -->
+    <!-- Pop-under script deferred until after window load to avoid blocking render -->
     <script type='text/javascript'>
-        // Load popunder script with error handling
-        (function() {
-            var script = document.createElement('script');
-            script.type = 'text/javascript';
-            script.src = '//violationtones.com/5f/14/06/5f14061e3eb1712029fc0b3ac8f3034f.js';
-            script.onerror = function() {
-                console.log('Popunder script failed to load');
-            };
-            document.head.appendChild(script);
-        })();
-
-        // Load social bar script with error handling and retry
-        (function() {
-            var script = document.createElement('script');
-            script.type = 'text/javascript';
-            script.src = '//violationtones.com/43/8f/a5/438fa524d4342a132b9a0bc734e61d56.js';
-            script.async = true;
-            script.onload = function() {
-                console.log('Social bar script loaded successfully');
-            };
-            script.onerror = function() {
-                console.log('Social bar script failed to load, retrying...');
-                // Retry with direct script injection
-                setTimeout(function() {
-                    var retryScript = document.createElement('script');
-                    retryScript.type = 'text/javascript';
-                    retryScript.src = 'https://violationtones.com/43/8f/a5/438fa524d4342a132b9a0bc734e61d56.js';
-                    document.head.appendChild(retryScript);
-                }, 2000);
-            };
-            document.head.appendChild(script);
-        })();
+        window.addEventListener('load', function() {
+            try {
+                var script = document.createElement('script');
+                script.type = 'text/javascript';
+                script.src = '//violationtones.com/5f/14/06/5f14061e3eb1712029fc0b3ac8f3034f.js';
+                script.onerror = function() {
+                    console.log('Popunder script failed to load');
+                };
+                document.head.appendChild(script);
+            } catch (e) {
+                console.log('Popunder loader error', e);
+            }
+        });
+        // Social Bar disabled (very low eCPC/CPM for current GEO mix)
+        // Keeping Popunder only to improve blended CPM
     </script>
     <style>
         body {
@@ -140,75 +123,49 @@
 
 <div class="intermediate-container">
     <div class="container-fluid">
-        <!-- Top Banner Ad (Desktop) -->
-        <div class="ad-container ad-desktop text-center mb-3">
-            <script type="text/javascript">
-                atOptions = {
-                    'key' : '3c47c0bda68f1da52fd5e6ca14ff2f47',
-                    'format' : 'iframe',
-                    'height' : 90,
-                    'width' : 728,
-                    'params' : {}
-                };
-            </script>
-            <script type="text/javascript" src="//violationtones.com/3c47c0bda68f1da52fd5e6ca14ff2f47/invoke.js"></script>
+        <!-- Desktop Header Ad Grid: fills empty space with multiple 300x250s -->
+        <div class="ad-grid ad-desktop mb-3">
+            <div class="ad-container text-center">
+                <script type="text/javascript">
+                    atOptions = {
+                        'key' : 'c77addd8807ae1501482c5f5aac695f6',
+                        'format' : 'iframe',
+                        'height' : 250,
+                        'width' : 300,
+                        'params' : {}
+                    };
+                </script>
+                <script type="text/javascript" src="//violationtones.com/c77addd8807ae1501482c5f5aac695f6/invoke.js"></script>
+            </div>
+            <div class="ad-container text-center">
+                <script type="text/javascript">
+                    atOptions = {
+                        'key' : 'c77addd8807ae1501482c5f5aac695f6',
+                        'format' : 'iframe',
+                        'height' : 250,
+                        'width' : 300,
+                        'params' : {}
+                    };
+                </script>
+                <script type="text/javascript" src="//violationtones.com/c77addd8807ae1501482c5f5aac695f6/invoke.js"></script>
+            </div>
+            <div class="ad-container text-center">
+                <script type="text/javascript">
+                    atOptions = {
+                        'key' : 'c77addd8807ae1501482c5f5aac695f6',
+                        'format' : 'iframe',
+                        'height' : 250,
+                        'width' : 300,
+                        'params' : {}
+                    };
+                </script>
+                <script type="text/javascript" src="//violationtones.com/c77addd8807ae1501482c5f5aac695f6/invoke.js"></script>
+            </div>
         </div>
 
-        <!-- Additional Desktop Header Ad -->
-        <div class="ad-container ad-desktop text-center mb-3">
-            <script type="text/javascript">
-                atOptions = {
-                    'key' : 'c77addd8807ae1501482c5f5aac695f6',
-                    'format' : 'iframe',
-                    'height' : 250,
-                    'width' : 300,
-                    'params' : {}
-                };
-            </script>
-            <script type="text/javascript" src="//violationtones.com/c77addd8807ae1501482c5f5aac695f6/invoke.js"></script>
-        </div>
+        <!-- Removed low-CPM 468x60 desktop banner -->
 
-        <!-- High Revenue Desktop Leaderboard -->
-        <div class="ad-container ad-desktop text-center mb-3">
-            <script type="text/javascript">
-                atOptions = {
-                    'key' : '3c47c0bda68f1da52fd5e6ca14ff2f47',
-                    'format' : 'iframe',
-                    'height' : 90,
-                    'width' : 728,
-                    'params' : {}
-                };
-            </script>
-            <script type="text/javascript" src="//violationtones.com/3c47c0bda68f1da52fd5e6ca14ff2f47/invoke.js"></script>
-        </div>
-
-        <!-- Premium Desktop Banner -->
-        <div class="ad-container ad-desktop text-center mb-3">
-            <script type="text/javascript">
-                atOptions = {
-                    'key' : 'c47ccb66c1a48fe021c9f216fc18b306',
-                    'format' : 'iframe',
-                    'height' : 60,
-                    'width' : 468,
-                    'params' : {}
-                };
-            </script>
-            <script type="text/javascript" src="//violationtones.com/c47ccb66c1a48fe021c9f216fc18b306/invoke.js"></script>
-        </div>
-
-        <!-- Top Mobile Ad -->
-        <div class="ad-container ad-mobile text-center mb-3">
-            <script type="text/javascript">
-                atOptions = {
-                    'key' : 'b5246cd3c56fd524c3b1d829a8c1c7cf',
-                    'format' : 'iframe',
-                    'height' : 50,
-                    'width' : 320,
-                    'params' : {}
-                };
-            </script>
-            <script type="text/javascript" src="//violationtones.com/b5246cd3c56fd524c3b1d829a8c1c7cf/invoke.js"></script>
-        </div>
+        <!-- Removed low-CPM 320x50 mobile banner (top) -->
 
         <!-- High Revenue Mobile Banner 1 -->
         <div class="ad-container ad-mobile text-center mb-3">
@@ -224,60 +181,43 @@
             <script type="text/javascript" src="//violationtones.com/c77addd8807ae1501482c5f5aac695f6/invoke.js"></script>
         </div>
 
-        <!-- High Revenue Mobile Banner 2 -->
-        <div class="ad-container ad-mobile text-center mb-3">
-            <script async="async" data-cfasync="false" src="//violationtones.com/b9eaba6088ddcc69a2771c2c98bf19bb/invoke.js"></script>
-            <div id="container-mobile-top-b9eaba6088ddcc69a2771c2c98bf19bb"></div>
-        </div>
+        <!-- Removed native/mobile banner 2 (low yield) -->
 
-        <!-- Sticky Mobile Ad for Revenue Optimization -->
-        <div class="mobile-sticky-ad ad-mobile">
-            <script type="text/javascript">
-                atOptions = {
-                    'key' : 'b5246cd3c56fd524c3b1d829a8c1c7cf',
-                    'format' : 'iframe',
-                    'height' : 50,
-                    'width' : 320,
-                    'params' : {}
-                };
-            </script>
-            <script type="text/javascript" src="//violationtones.com/b5246cd3c56fd524c3b1d829a8c1c7cf/invoke.js"></script>
-        </div>
+        <!-- Removed sticky 320x50 mobile banner -->
 
-        <div class="row">
+        <div class="row g-0">
             <!-- Left Sidebar Ad (Desktop) -->
-            <div class="col-lg-2 ad-sidebar ad-desktop">
-                <!-- Top Left Ad -->
+            <div class="col-lg-3 ad-sidebar ad-desktop">
+                <!-- 300x250 Left Sidebar #1 -->
                 <div class="mb-4">
                     <script type="text/javascript">
                         atOptions = {
-                            'key' : 'a87776b119f2afd92879d3cb352930c0',
+                            'key' : 'c77addd8807ae1501482c5f5aac695f6',
                             'format' : 'iframe',
-                            'height' : 600,
-                            'width' : 160,
+                            'height' : 250,
+                            'width' : 300,
                             'params' : {}
                         };
                     </script>
-                    <script type="text/javascript" src="//violationtones.com/a87776b119f2afd92879d3cb352930c0/invoke.js"></script>
+                    <script type="text/javascript" src="//violationtones.com/c77addd8807ae1501482c5f5aac695f6/invoke.js"></script>
                 </div>
-
-                <!-- Bottom Left Ad -->
+                <!-- 300x250 Left Sidebar #2 -->
                 <div class="mb-4">
                     <script type="text/javascript">
                         atOptions = {
-                            'key' : 'c0a2b466bf403a6e43ca074047a6286a',
+                            'key' : 'c77addd8807ae1501482c5f5aac695f6',
                             'format' : 'iframe',
-                            'height' : 300,
-                            'width' : 160,
+                            'height' : 250,
+                            'width' : 300,
                             'params' : {}
                         };
                     </script>
-                    <script type="text/javascript" src="//violationtones.com/c0a2b466bf403a6e43ca074047a6286a/invoke.js"></script>
+                    <script type="text/javascript" src="//violationtones.com/c77addd8807ae1501482c5f5aac695f6/invoke.js"></script>
                 </div>
             </div>
 
             <!-- Main Content -->
-            <div class="col-lg-8">
+            <div class="col-lg-6">
                 <div class="intermediate-card text-center">
                     <!-- Logo -->
                     <div class="mb-4">
@@ -346,66 +286,20 @@
                         <script type="text/javascript" src="//violationtones.com/c77addd8807ae1501482c5f5aac695f6/invoke.js"></script>
                     </div>
 
-                    <!-- Native Banner -->
-                    <div class="ad-container my-4">
-                        <script async="async" data-cfasync="false" src="//violationtones.com/b9eaba6088ddcc69a2771c2c98bf19bb/invoke.js"></script>
-                        <div id="container-b9eaba6088ddcc69a2771c2c98bf19bb"></div>
-                    </div>
+                    <!-- Removed native banner (low CPM) -->
 
-                    <!-- High Revenue Content Ad 1 -->
-                    <div class="ad-container my-4">
-                        <script type="text/javascript">
-                            atOptions = {
-                                'key' : 'c47ccb66c1a48fe021c9f216fc18b306',
-                                'format' : 'iframe',
-                                'height' : 60,
-                                'width' : 468,
-                                'params' : {}
-                            };
-                        </script>
-                        <script type="text/javascript" src="//violationtones.com/c47ccb66c1a48fe021c9f216fc18b306/invoke.js"></script>
-                    </div>
+                    <!-- Removed 468x60 content banner -->
 
                     <!-- High Revenue Content Ad 2 -->
                     <div class="ad-container my-4">
-                        <script type="text/javascript">
-                            atOptions = {
-                                'key' : '3c47c0bda68f1da52fd5e6ca14ff2f47',
-                                'format' : 'iframe',
-                                'height' : 90,
-                                'width' : 728,
-                                'params' : {}
-                            };
-                        </script>
-                        <script type="text/javascript" src="//violationtones.com/3c47c0bda68f1da52fd5e6ca14ff2f47/invoke.js"></script>
+                        <!-- Removed 728x90 content banner -->
                     </div>
 
-                    <!-- Additional Desktop Content Ad -->
-                    <div class="ad-container ad-desktop my-4">
-                        <script type="text/javascript">
-                            atOptions = {
-                                'key' : 'c47ccb66c1a48fe021c9f216fc18b306',
-                                'format' : 'iframe',
-                                'height' : 60,
-                                'width' : 468,
-                                'params' : {}
-                            };
-                        </script>
-                        <script type="text/javascript" src="//violationtones.com/c47ccb66c1a48fe021c9f216fc18b306/invoke.js"></script>
-                    </div>
+                    <!-- Removed 468x60 additional desktop content banner -->
 
                     <!-- Mobile-specific Ad 3 -->
                     <div class="ad-container ad-mobile my-4">
-                        <script type="text/javascript">
-                            atOptions = {
-                                'key' : 'b5246cd3c56fd524c3b1d829a8c1c7cf',
-                                'format' : 'iframe',
-                                'height' : 50,
-                                'width' : 320,
-                                'params' : {}
-                            };
-                        </script>
-                        <script type="text/javascript" src="//violationtones.com/b5246cd3c56fd524c3b1d829a8c1c7cf/invoke.js"></script>
+                        <!-- Removed 320x50 mobile banner (mid content) -->
                     </div>
 
                     <div class="mt-4">
@@ -417,36 +311,21 @@
             </div>
 
             <!-- Right Sidebar Ad (Desktop) -->
-            <div class="col-lg-2 ad-sidebar ad-desktop">
-                <!-- Top Right Ad -->
+            <div class="col-lg-3 ad-sidebar ad-desktop">
+                <!-- 300x250 Right Sidebar #1 -->
                 <div class="mb-4">
                     <script type="text/javascript">
                         atOptions = {
-                            'key' : 'c0a2b466bf403a6e43ca074047a6286a',
+                            'key' : 'c77addd8807ae1501482c5f5aac695f6',
                             'format' : 'iframe',
-                            'height' : 300,
-                            'width' : 160,
+                            'height' : 250,
+                            'width' : 300,
                             'params' : {}
                         };
                     </script>
-                    <script type="text/javascript" src="//violationtones.com/c0a2b466bf403a6e43ca074047a6286a/invoke.js"></script>
+                    <script type="text/javascript" src="//violationtones.com/c77addd8807ae1501482c5f5aac695f6/invoke.js"></script>
                 </div>
-
-                <!-- Middle Right Ad -->
-                <div class="mb-4">
-                    <script type="text/javascript">
-                        atOptions = {
-                            'key' : 'a87776b119f2afd92879d3cb352930c0',
-                            'format' : 'iframe',
-                            'height' : 600,
-                            'width' : 160,
-                            'params' : {}
-                        };
-                    </script>
-                    <script type="text/javascript" src="//violationtones.com/a87776b119f2afd92879d3cb352930c0/invoke.js"></script>
-                </div>
-
-                <!-- Bottom Right Ad -->
+                <!-- 300x250 Right Sidebar #2 -->
                 <div class="mb-4">
                     <script type="text/javascript">
                         atOptions = {
@@ -463,59 +342,53 @@
         </div>
 
         <!-- Bottom Ads (Responsive) -->
-        <div class="ad-container mt-4">
-            <!-- Desktop Ad -->
-            <div class="ad-desktop">
+        <div class="ad-grid mt-4">
+            <!-- Bottom 300x250 #1 -->
+            <div class="ad-container text-center">
                 <script type="text/javascript">
                     atOptions = {
-                        'key' : 'c47ccb66c1a48fe021c9f216fc18b306',
+                        'key' : 'c77addd8807ae1501482c5f5aac695f6',
                         'format' : 'iframe',
-                        'height' : 60,
-                        'width' : 468,
+                        'height' : 250,
+                        'width' : 300,
                         'params' : {}
                     };
                 </script>
-                <script type="text/javascript" src="//violationtones.com/c47ccb66c1a48fe021c9f216fc18b306/invoke.js"></script>
+                <script type="text/javascript" src="//violationtones.com/c77addd8807ae1501482c5f5aac695f6/invoke.js"></script>
             </div>
-            <!-- Mobile Ad -->
-            <div class="ad-mobile">
+            <!-- Bottom 300x250 #2 -->
+            <div class="ad-container text-center">
                 <script type="text/javascript">
                     atOptions = {
-                        'key' : 'b5246cd3c56fd524c3b1d829a8c1c7cf',
+                        'key' : 'c77addd8807ae1501482c5f5aac695f6',
                         'format' : 'iframe',
-                        'height' : 50,
-                        'width' : 320,
+                        'height' : 250,
+                        'width' : 300,
                         'params' : {}
                     };
                 </script>
-                <script type="text/javascript" src="//violationtones.com/b5246cd3c56fd524c3b1d829a8c1c7cf/invoke.js"></script>
+                <script type="text/javascript" src="//violationtones.com/c77addd8807ae1501482c5f5aac695f6/invoke.js"></script>
+            </div>
+            <!-- Bottom 300x250 #3 (falls below on mobile) -->
+            <div class="ad-container text-center ad-mobile">
+                <script type="text/javascript">
+                    atOptions = {
+                        'key' : 'c77addd8807ae1501482c5f5aac695f6',
+                        'format' : 'iframe',
+                        'height' : 250,
+                        'width' : 300,
+                        'params' : {}
+                    };
+                </script>
+                <script type="text/javascript" src="//violationtones.com/c77addd8807ae1501482c5f5aac695f6/invoke.js"></script>
             </div>
         </div>
 
-        <!-- Additional Mobile Bottom Ads -->
-        <div class="ad-container ad-mobile mt-4">
-            <script type="text/javascript">
-                atOptions = {
-                    'key' : 'c77addd8807ae1501482c5f5aac695f6',
-                    'format' : 'iframe',
-                    'height' : 250,
-                    'width' : 300,
-                    'params' : {}
-                };
-            </script>
-            <script type="text/javascript" src="//violationtones.com/c77addd8807ae1501482c5f5aac695f6/invoke.js"></script>
-        </div>
+        <!-- Additional Mobile Bottom Ads (unchanged, 300x250 retained) -->
 
-        <!-- Mobile Native Banner -->
-        <div class="ad-container ad-mobile mt-4">
-            <script async="async" data-cfasync="false" src="//violationtones.com/b9eaba6088ddcc69a2771c2c98bf19bb/invoke.js"></script>
-            <div id="container-mobile-b9eaba6088ddcc69a2771c2c98bf19bb"></div>
-        </div>
+        <!-- Removed mobile native banner -->
 
-        <!-- Social Bar Ad (Fallback) -->
-        <div class="ad-container text-center my-3">
-            <script type='text/javascript' src='//violationtones.com/43/8f/a5/438fa524d4342a132b9a0bc734e61d56.js'></script>
-        </div>
+        <!-- Social Bar removed (low CPM) -->
 
         <!-- Pre-Continue High Revenue Ads -->
         <div class="ad-container text-center my-4">
@@ -531,25 +404,9 @@
             <script type="text/javascript" src="//violationtones.com/c77addd8807ae1501482c5f5aac695f6/invoke.js"></script>
         </div>
 
-        <!-- Additional Native Ad Before Continue -->
-        <div class="ad-container text-center my-4">
-            <script async="async" data-cfasync="false" src="//violationtones.com/b9eaba6088ddcc69a2771c2c98bf19bb/invoke.js"></script>
-            <div id="container-pre-continue-b9eaba6088ddcc69a2771c2c98bf19bb"></div>
-        </div>
+        <!-- Removed additional native ad before continue (low CPM) -->
 
-        <!-- Mobile-specific Pre-Continue Ad -->
-        <div class="ad-container ad-mobile text-center my-4">
-            <script type="text/javascript">
-                atOptions = {
-                    'key' : 'b5246cd3c56fd524c3b1d829a8c1c7cf',
-                    'format' : 'iframe',
-                    'height' : 50,
-                    'width' : 320,
-                    'params' : {}
-                };
-            </script>
-            <script type="text/javascript" src="//violationtones.com/b5246cd3c56fd524c3b1d829a8c1c7cf/invoke.js"></script>
-        </div>
+        <!-- Removed 320x50 pre-continue mobile banner -->
 
         <!-- Continue Button -->
         <div class="text-center mt-4">
@@ -572,7 +429,7 @@
             totalPages: {{ total_pages }},
             shortCode: "{{ short_code }}",
             directLink: "https://violationtones.com/vwh3k6pwkv?key=53274b8825d29e20912b29cf21df8bc9",
-            requiredClicks: 2 // Change this number to control how many clicks are required (1-5 recommended)
+            requiredClicks: 3 // Increased to 3 to show one more monetized page per visit
         };
     </script>
 
